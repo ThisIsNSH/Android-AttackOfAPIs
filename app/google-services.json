@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "774856605271",
+    "firebase_url": "https://pucho-b236e.firebaseio.com",
+    "project_id": "pucho-b236e",
+    "storage_bucket": "pucho-b236e.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:774856605271:android:8d0b39124159fc0d",
+        "android_client_info": {
+          "package_name": "com.nsh.pucho"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "774856605271-rgfqpvrq6ce1kh0eub0g7cv2neot99vu.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAbisMWhBc8WiBIeXnZjEywIiNpA6ynoPU"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

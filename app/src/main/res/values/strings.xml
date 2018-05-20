@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">Pucho</string>
+    <string name="user_name">no user</string>
+    <string name="user_pic">no pic</string>
+    <string name="facebook_app_id">508440866220645</string>
+    <string name="fb_login_protocol_scheme">fb508440866220645</string>
+
+    <string name="client_id">774856605271-rgfqpvrq6ce1kh0eub0g7cv2neot99vu.apps.googleusercontent.com</string>
+</resources>

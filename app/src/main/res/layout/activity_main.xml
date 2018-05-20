@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:layout_height="match_parent"
+    tools:context="com.nsh.pucho.MainActivity">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="user id"
+        android:id="@+id/user_id"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/method"
+        android:text="google/facebook"/>
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Google"
+        android:id="@+id/google"/>
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="GoogleOut"
+        android:id="@+id/google_out"/>
+    <com.facebook.login.widget.LoginButton
+
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="facebook"
+        android:id="@+id/facebook"/>
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="facebookOut"
+        android:id="@+id/facebook_out"/>
+</LinearLayout>

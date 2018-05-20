@@ -1,12 +1,18 @@
 package com.nsh.pucho;
 
+import android.app.ActionBar;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -14,6 +20,7 @@ import com.facebook.AccessToken;
 import com.facebook.CallbackManager;
 import com.facebook.FacebookCallback;
 import com.facebook.FacebookException;
+import com.facebook.FacebookSdk;
 import com.facebook.login.LoginManager;
 import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
@@ -31,10 +38,13 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
 
-public class MainActivity extends AppCompatActivity {
+import java.util.Arrays;
 
-    TextView username, method;
-    Button google_in, google_out, facebook_in, facebook_out;
+import static android.view.View.VISIBLE;
+
+public class LoginActivity extends AppCompatActivity {
+
+    ImageButton google_in,facebook;
     GoogleSignInClient mGoogleSignInClient;
     private static final String TAG = "GoogleActivity";
     private static final int RC_SIGN_IN = 9001;
@@ -44,14 +54,14 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-
-        username = findViewById(R.id.user_id);
-        method = findViewById(R.id.method);
+        setContentView(R.layout.activity_login);
+        if(Build.VERSION.SDK_INT>=Build.VERSION_CODES.KITKAT){
+            Window w = getWindow();
+            w.setFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS,WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
+            w.getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_HIDE_NAVIGATION);
+        }
+        facebook = findViewById(R.id.facebook);
         google_in = findViewById(R.id.google);
-        google_out = findViewById(R.id.google_out);
-        //facebook_in = findViewById(R.id.facebook);
-        facebook_out = findViewById(R.id.facebook_out);
 
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .requestIdToken(getString(R.string.client_id))
@@ -60,10 +70,12 @@ public class MainActivity extends AppCompatActivity {
         mGoogleSignInClient = GoogleSignIn.getClient(this, gso);
         mAuth = FirebaseAuth.getInstance();
 
+        FacebookSdk.sdkInitialize(this.getApplicationContext());
         mCallbackManager = CallbackManager.Factory.create();
-        LoginButton loginButton = findViewById(R.id.facebook);
-        loginButton.setReadPermissions("email", "public_profile");
-        loginButton.registerCallback(mCallbackManager, new FacebookCallback<LoginResult>() {
+        //LoginButton loginButton = findViewById(R.id.facebook);
+        //loginButton.setReadPermissions("email", "public_profile");
+
+        LoginManager.getInstance().registerCallback(mCallbackManager, new FacebookCallback<LoginResult>() {
             @Override
             public void onSuccess(LoginResult loginResult) {
                 Log.d(TAG, "facebook:onSuccess:" + loginResult);
@@ -82,23 +94,16 @@ public class MainActivity extends AppCompatActivity {
                 updateUI(null);
             }
         });
-
         google_in.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 signIn();
             }
         });
-        google_out.setOnClickListener(new View.OnClickListener() {
+        facebook.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
-                GsignOut();
-            }
-        });
-        facebook_out.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                FsignOut();
+            public void onClick(View view) {    
+                LoginManager.getInstance().logInWithReadPermissions(LoginActivity.this, Arrays.asList("public_profile", "user_friends"));
             }
         });
     }
@@ -160,7 +165,7 @@ public class MainActivity extends AppCompatActivity {
                             updateUI(user);
                         } else {
                             Log.w(TAG, "signInWithCredential:failure", task.getException());
-                            Toast.makeText(MainActivity.this, "Authentication failed.",
+                            Toast.makeText(LoginActivity.this, "Authentication failed.",
                                     Toast.LENGTH_SHORT).show();
                             updateUI(null);
                         }
@@ -187,13 +192,5 @@ public class MainActivity extends AppCompatActivity {
                 });
     }
 
-    public void updateUI(FirebaseUser u) {
-        if (u == null) {
-            username.setText(getString(R.string.user_name));
-            method.setText(getString(R.string.user_pic));
-        } else {
-            username.setText(u.getDisplayName());
-            method.setText(u.getPhotoUrl().toString());
-        }
-    }
+    public void updateUI(FirebaseUser u) {}
 }

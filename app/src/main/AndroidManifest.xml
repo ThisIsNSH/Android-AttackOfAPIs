@@ -3,6 +3,7 @@
     package="com.nsh.pucho">
 
     <uses-permission android:name="android.permission.INTERNET" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -13,9 +14,13 @@
         <meta-data
             android:name="com.facebook.sdk.ApplicationId"
             android:value="@string/facebook_app_id" />
+
         <activity
             android:name=".LoginActivity"
             android:configChanges="keyboard|keyboardHidden|screenLayout|screenSize|orientation">
+
+        </activity>
+        <activity android:name=".DashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

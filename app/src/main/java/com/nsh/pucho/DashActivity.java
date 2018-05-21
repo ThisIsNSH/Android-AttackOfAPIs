@@ -16,7 +16,6 @@ import com.android.volley.toolbox.BasicNetwork;
 import com.android.volley.toolbox.DiskBasedCache;
 import com.android.volley.toolbox.HurlStack;
 import com.android.volley.toolbox.JsonObjectRequest;
-import com.android.volley.toolbox.JsonRequest;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -25,20 +24,20 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 
 public class DashActivity extends AppCompatActivity {
-    JSONObject jsonRequest;
 
+JSONObject jsonRequest;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dash);
         final TextView a = findViewById(R.id.abc);
-        String input3 = "gs://demomaker/gbikes_dinosaur.mp4";
-        String input2 = "gs://demomaker/gbikes_dinosaur.mp4";
-        String input1 = "gs://demomaker/cat.mp4";
+        String input3="gs://demomaker/gbikes_dinosaur.mp4";
+        String input2="gs://demomaker/gbikes_dinosaur.mp4";
+        String input1="gs://demomaker/cat.mp4";
         label(input1);
-        shot(input2);
-        explicit(input3);
+        //shot(input2);
+        //explicit(input3);
 
     }
 
@@ -53,36 +52,36 @@ public class DashActivity extends AppCompatActivity {
                     "  \"inputUri\": \"" + input + "\",\n" +
                     "  \"features\": [\"LABEL_DETECTION\"]\n" +
                     "}");
-
-            JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, url, jsonRequest, new Response.Listener<JSONObject>() {
-                @Override
-                public void onResponse(JSONObject response) {
-                    System.out.println(response);
-                    try {
-                        String name = response.getString("name");
-                        final String url1 = "https://videointelligence.googleapis.com/v1/operations/" + name + "?key=AIzaSyDZAgxG1MKgyj47N_pWb_jjzsBJsUMjFDI";
-                        final Handler handler = new Handler();
-                        System.out.println(url1);
-                        handler.postDelayed(new Runnable() {
-                            @Override
-                            public void run() {
-                                label1(url1);
-                            }
-                        }, 15000);
-                    } catch (JSONException e) {
-                        e.printStackTrace();
-                    }
-
-                }
-            }, new Response.ErrorListener() {
-                @Override
-                public void onErrorResponse(VolleyError error) {
-                }
-            });
-            queue.add(jsonObjectRequest);
         } catch (JSONException e) {
             e.printStackTrace();
         }
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, url, jsonRequest, new Response.Listener<JSONObject>() {
+            @Override
+            public void onResponse(JSONObject response) {
+                System.out.println(response);
+                try {
+                    String name = response.getString("name");
+                    name = "us-west1.11303815698753239074";
+                    final String url1 = "https://videointelligence.googleapis.com/v1/operations/" + name + "?key=AIzaSyDZAgxG1MKgyj47N_pWb_jjzsBJsUMjFDI";
+                    final Handler handler = new Handler();
+                    System.out.println(url1);
+                    handler.postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            label1(url1);
+                        }
+                    }, 15000);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+            }
+        });
+        queue.add(jsonObjectRequest);
     }
 
     public void label1(String url1) {
@@ -127,6 +126,7 @@ public class DashActivity extends AppCompatActivity {
             public void onErrorResponse(VolleyError error) {
             }
         });
+        jsonObjectRequest1.setRetryPolicy(new DefaultRetryPolicy(DefaultRetryPolicy.DEFAULT_TIMEOUT_MS * 3, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
         queue.add(jsonObjectRequest1);
     }
 
@@ -135,44 +135,42 @@ public class DashActivity extends AppCompatActivity {
         Network network = new BasicNetwork(new HurlStack());
         RequestQueue queue = new RequestQueue(cache, network);
         queue.start();
-        JSONObject jsonRequest;
+
         String url = "https://videointelligence.googleapis.com/v1/videos:annotate?key=AIzaSyDZAgxG1MKgyj47N_pWb_jjzsBJsUMjFDI";
         try {
             jsonRequest = new JSONObject("{\n" +
                     "  \"inputUri\": \"" + input + "\",\n" +
                     "  \"features\": [\"SHOT_CHANGE_DETECTION\"]\n" +
                     "}");
-
-            JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, url, jsonRequest, new Response.Listener<JSONObject>() {
-                @Override
-                public void onResponse(JSONObject response) {
-                    System.out.println(response);
-                    try {
-                        String name = response.getString("name");
-                        final String url1 = "https://videointelligence.googleapis.com/v1/operations/" + name + "?key=AIzaSyDZAgxG1MKgyj47N_pWb_jjzsBJsUMjFDI";
-                        final Handler handler = new Handler();
-                        System.out.println(url1);
-                        handler.postDelayed(new Runnable() {
-                            @Override
-                            public void run() {
-                                shot1(url1);
-                            }
-                        }, 15000);
-                    } catch (JSONException e) {
-                        e.printStackTrace();
-                    }
-
-                }
-            }, new Response.ErrorListener() {
-                @Override
-                public void onErrorResponse(VolleyError error) {
-                }
-            });
-            queue.add(jsonObjectRequest);
         } catch (JSONException e) {
             e.printStackTrace();
         }
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, url, jsonRequest, new Response.Listener<JSONObject>() {
+            @Override
+            public void onResponse(JSONObject response) {
+                System.out.println(response);
+                try {
+                    String name = response.getString("name");
+                    final String url1 = "https://videointelligence.googleapis.com/v1/operations/" + name + "?key=AIzaSyDZAgxG1MKgyj47N_pWb_jjzsBJsUMjFDI";
+                    final Handler handler = new Handler();
+                    System.out.println(url1);
+                    handler.postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            shot1(url1);
+                        }
+                    }, 15000);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
 
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+            }
+        });
+        queue.add(jsonObjectRequest);
     }
 
     public void shot1(String url1) {
@@ -186,7 +184,7 @@ public class DashActivity extends AppCompatActivity {
             @Override
             public void onResponse(final JSONObject response) {
 
-                System.out.println(response);
+                    System.out.println(response);
 
 
             }
@@ -195,6 +193,7 @@ public class DashActivity extends AppCompatActivity {
             public void onErrorResponse(VolleyError error) {
             }
         });
+        jsonObjectRequest1.setRetryPolicy(new DefaultRetryPolicy(DefaultRetryPolicy.DEFAULT_TIMEOUT_MS * 3, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
         queue.add(jsonObjectRequest1);
     }
 
@@ -203,43 +202,42 @@ public class DashActivity extends AppCompatActivity {
         Network network = new BasicNetwork(new HurlStack());
         RequestQueue queue = new RequestQueue(cache, network);
         queue.start();
-        JSONObject jsonRequest;
+
         String url = "https://videointelligence.googleapis.com/v1/videos:annotate?key=AIzaSyDZAgxG1MKgyj47N_pWb_jjzsBJsUMjFDI";
         try {
             jsonRequest = new JSONObject("{\n" +
                     "  \"inputUri\": \"" + input + "\",\n" +
                     "  \"features\": [\"EXPLICIT_CONTENT_DETECTION\"]\n" +
                     "}");
-
-            JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, url, jsonRequest, new Response.Listener<JSONObject>() {
-                @Override
-                public void onResponse(JSONObject response) {
-                    System.out.println(response);
-                    try {
-                        String name = response.getString("name");
-                        final String url1 = "https://videointelligence.googleapis.com/v1/operations/" + name + "?key=AIzaSyDZAgxG1MKgyj47N_pWb_jjzsBJsUMjFDI";
-                        final Handler handler = new Handler();
-                        System.out.println(url1);
-                        handler.postDelayed(new Runnable() {
-                            @Override
-                            public void run() {
-                                explicit1(url1);
-                            }
-                        }, 15000);
-                    } catch (JSONException e) {
-                        e.printStackTrace();
-                    }
-
-                }
-            }, new Response.ErrorListener() {
-                @Override
-                public void onErrorResponse(VolleyError error) {
-                }
-            });
-            queue.add(jsonObjectRequest);
         } catch (JSONException e) {
             e.printStackTrace();
         }
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, url, jsonRequest, new Response.Listener<JSONObject>() {
+            @Override
+            public void onResponse(JSONObject response) {
+                System.out.println(response);
+                try {
+                    String name = response.getString("name");
+                    final String url1 = "https://videointelligence.googleapis.com/v1/operations/" + name + "?key=AIzaSyDZAgxG1MKgyj47N_pWb_jjzsBJsUMjFDI";
+                    final Handler handler = new Handler();
+                    System.out.println(url1);
+                    handler.postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            explicit1(url1);
+                        }
+                    }, 15000);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+            }
+        });
+        queue.add(jsonObjectRequest);
     }
 
     public void explicit1(String url1) {
@@ -261,6 +259,7 @@ public class DashActivity extends AppCompatActivity {
             public void onErrorResponse(VolleyError error) {
             }
         });
+        jsonObjectRequest1.setRetryPolicy(new DefaultRetryPolicy(DefaultRetryPolicy.DEFAULT_TIMEOUT_MS * 3, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
         queue.add(jsonObjectRequest1);
     }
 }

@@ -17,10 +17,9 @@
 
         <activity
             android:name=".LoginActivity"
-            android:configChanges="keyboard|keyboardHidden|screenLayout|screenSize|orientation">
-
-        </activity>
-        <activity android:name=".DashActivity">
+            android:configChanges="keyboard|keyboardHidden|screenLayout|screenSize|orientation"/>
+        <activity android:name=".DashActivity"/>
+        <activity android:name=".AwsActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

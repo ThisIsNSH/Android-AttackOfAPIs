@@ -36,8 +36,8 @@ JSONObject jsonRequest;
         String input2="gs://demomaker/gbikes_dinosaur.mp4";
         String input1="gs://demomaker/cat.mp4";
         label(input1);
-        //shot(input2);
-        //explicit(input3);
+        shot(input2);
+        explicit(input3);
 
     }
 
@@ -61,7 +61,7 @@ JSONObject jsonRequest;
                 System.out.println(response);
                 try {
                     String name = response.getString("name");
-                    name = "us-west1.11303815698753239074";
+                    //name = "us-west1.11303815698753239074";
                     final String url1 = "https://videointelligence.googleapis.com/v1/operations/" + name + "?key=AIzaSyDZAgxG1MKgyj47N_pWb_jjzsBJsUMjFDI";
                     final Handler handler = new Handler();
                     System.out.println(url1);

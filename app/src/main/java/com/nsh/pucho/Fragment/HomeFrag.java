@@ -16,9 +16,11 @@ import android.widget.Toast;
 import com.google.firebase.auth.FirebaseAuth;
 import com.nsh.pucho.Activity.LoginActivity;
 import com.nsh.pucho.Adapter.CardAdapter;
+import com.nsh.pucho.Adapter.RecentAdapter;
 import com.nsh.pucho.Extra.Card;
+import com.nsh.pucho.Extra.DatabaseHelper;
+import com.nsh.pucho.Extra.Recent;
 import com.nsh.pucho.R;
-import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,8 +29,12 @@ import de.hdodenhof.circleimageview.CircleImageView;
 
 
 public class HomeFrag extends Fragment implements View.OnClickListener {
+
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
+    public RecentAdapter mAdapter;
+    public List<Recent> notesList = new ArrayList<>();
+    public DatabaseHelper db;
     private String mParam1;
     private String mParam2;
     private List<Card> cardList = new ArrayList<>();
@@ -37,6 +43,7 @@ public class HomeFrag extends Fragment implements View.OnClickListener {
     private TextView acc_name, sign_out;
     private CircleImageView acc_img;
     private OnFragmentInteractionListener mListener;
+    private RecyclerView recyclerView;
 
     public HomeFrag() {
     }
@@ -68,24 +75,64 @@ public class HomeFrag extends Fragment implements View.OnClickListener {
     }
 
     private void recView(View view) {
-
+        recyclerView = view.findViewById(R.id.rece_rec);
         reco_rec = view.findViewById(R.id.reco_rec);
         acc_img = view.findViewById(R.id.acc_pic);
         acc_name = view.findViewById(R.id.acc_name);
         sign_out = view.findViewById(R.id.sign_out);
+
+        db = new DatabaseHelper(getContext());
+
+        notesList.addAll(db.getAllRecents());
+
+        mAdapter = new RecentAdapter(getContext(), notesList);
+        RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
+        recyclerView.setLayoutManager(mLayoutManager);
+        recyclerView.setItemAnimator(new DefaultItemAnimator());
+        recyclerView.setAdapter(mAdapter);
+        toggleEmptyNotes();
 
         //acc_name.setText(new LoginActivity().getName());
         //Picasso.with(getContext()).load(new LoginActivity().getURI()).into(acc_img);
         //sign_out.setOnClickListener(this);
 
         mCardAdapter = new CardAdapter(getContext(), cardList);
-        LinearLayoutManager mLayoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
-        reco_rec.setLayoutManager(mLayoutManager);
+        LinearLayoutManager mLayoutManager3 = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
+        reco_rec.setLayoutManager(mLayoutManager3);
 
         reco_rec.setItemAnimator(new DefaultItemAnimator());
         reco_rec.setAdapter(mCardAdapter);
         prepareRecoData();
 
+    }
+
+    public void createRecent(String name, String url, String function) {
+        // inserting note in db and getting
+        // newly inserted note id
+        long id = db.insertRecent(name, url, function);
+
+        // get the newly inserted note from db
+        Recent n = db.getRecent(id);
+
+        if (n != null) {
+            // adding new note to array list at 0 position
+            notesList.add(0, n);
+
+            // refreshing the list
+            mAdapter.notifyDataSetChanged();
+
+            toggleEmptyNotes();
+        }
+    }
+
+    private void toggleEmptyNotes() {
+        // you can check notesList.size() > 0
+
+        if (db.getRecentsCount() <= 0) {
+            recyclerView.setVisibility(View.GONE);
+        } else {
+            recyclerView.setVisibility(View.VISIBLE);
+        }
     }
 
     private void prepareRecoData() {

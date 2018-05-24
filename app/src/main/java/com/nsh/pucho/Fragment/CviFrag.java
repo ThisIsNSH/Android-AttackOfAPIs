@@ -17,8 +17,9 @@ import android.widget.Toast;
 import com.nsh.pucho.Adapter.CardAdapter;
 import com.nsh.pucho.Adapter.LabelAdapter;
 import com.nsh.pucho.Extra.Card;
+import com.nsh.pucho.Extra.DatabaseHelper;
 import com.nsh.pucho.Extra.Label;
-import com.nsh.pucho.Extra.RecyclerTouchListener;
+import com.nsh.pucho.Listener.RecyclerTouchListener;
 import com.nsh.pucho.Extra.Sample;
 import com.nsh.pucho.R;
 import com.xiaofeng.flowlayoutmanager.FlowLayoutManager;
@@ -147,7 +148,8 @@ public class CviFrag extends Fragment {
                 labelList1.clear();
                 labelList2.clear();
                 prepareLabelData(position);
-
+                DatabaseHelper n = new DatabaseHelper(getContext());
+                n.insertRecent("nishant1","https://cdn.shopify.com/s/files/1/1367/8297/products/CLOTHES_1024x1024.jpg","none");
 
                 Toast.makeText(getContext(), card.getName() + " is selected!", Toast.LENGTH_SHORT).show();
             }

@@ -20,7 +20,7 @@ import com.nsh.pucho.Adapter.CardAdapter;
 import com.nsh.pucho.Adapter.LabelAdapter;
 import com.nsh.pucho.Extra.Card;
 import com.nsh.pucho.Extra.Label;
-import com.nsh.pucho.Extra.RecyclerTouchListener;
+import com.nsh.pucho.Listener.RecyclerTouchListener;
 import com.nsh.pucho.Extra.Sample;
 import com.nsh.pucho.R;
 import com.xiaofeng.flowlayoutmanager.FlowLayoutManager;

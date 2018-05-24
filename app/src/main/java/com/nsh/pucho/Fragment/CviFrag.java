@@ -1,5 +1,7 @@
 package com.nsh.pucho.Fragment;
 
+import android.app.Dialog;
+import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -9,9 +11,12 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
+import android.widget.Toast;
 
 import com.nsh.pucho.Adapter.CardAdapter;
 import com.nsh.pucho.Extra.Card;
+import com.nsh.pucho.Extra.RecyclerTouchListener;
 import com.nsh.pucho.Extra.Sample;
 import com.nsh.pucho.R;
 
@@ -87,6 +92,24 @@ public class CviFrag extends Fragment {
 
         prepareCardData();
         prepareCard1Data();
+
+        cvi_media_rec.addOnItemTouchListener(new RecyclerTouchListener(getContext(), cvi_media_rec , new RecyclerTouchListener.ClickListener() {
+            @Override
+            public void onClick(View view, int position) {
+                Card card = cardList.get(position);
+                final Dialog dialog = new Dialog(getContext());
+                dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+                dialog.setContentView(R.layout.card_aws);
+                dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
+                dialog.show();
+                Toast.makeText(getContext(), card.getName() + " is selected!", Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onLongClick(View view, int position) {
+
+            }
+        }));
     }
 
     private void prepareCardData() {

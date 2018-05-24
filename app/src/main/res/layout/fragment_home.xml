@@ -2,7 +2,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#111"
+    android:background="#fff"
     android:orientation="vertical"
     tools:context="com.nsh.pucho.HomeFrag">
 
@@ -14,19 +14,21 @@
         <android.support.v7.widget.Toolbar
             android:layout_width="match_parent"
             android:layout_height="80dp"
-
-            android:background="#000"
-            android:elevation="4dp">
+            android:id="@+id/toolbar"
+            android:visibility="gone"
+            android:paddingTop="16dp"
+            android:background="#eee"
+            android:elevation="8dp">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="16dp"
+                android:layout_marginLeft="-64dp"
                 android:layout_marginTop="16dp"
-                android:fontFamily="@font/psb"
+                android:fontFamily="@font/psbi"
                 android:text="Home"
-                android:textColor="#fff"
-                android:textSize="30sp" />
+                android:textColor="#000"
+                android:textSize="25sp" />
         </android.support.v7.widget.Toolbar>
 
         <RelativeLayout
@@ -52,7 +54,7 @@
                 android:layout_toRightOf="@id/acc_pic"
                 android:fontFamily="@font/psb"
                 android:text="Name"
-                android:textColor="#fff"
+                android:textColor="#000"
                 android:textSize="25sp" />
 
             <TextView
@@ -64,7 +66,7 @@
                 android:layout_toRightOf="@id/acc_pic"
                 android:fontFamily="@font/ps"
                 android:text="Signout"
-                android:textColor="#fff"
+                android:textColor="#000"
                 android:textSize="20sp" />
         </RelativeLayout>
 
@@ -74,7 +76,7 @@
             android:layout_margin="16dp"
             android:fontFamily="@font/psb"
             android:text="Recommended"
-            android:textColor="#fff"
+            android:textColor="#000"
             android:textSize="25sp" />
 
         <android.support.v7.widget.RecyclerView
@@ -88,7 +90,7 @@
             android:layout_margin="16dp"
             android:fontFamily="@font/psb"
             android:text="Recent Activity"
-            android:textColor="#fff"
+            android:textColor="#000"
             android:textSize="25sp" />
 
         <android.support.v7.widget.RecyclerView

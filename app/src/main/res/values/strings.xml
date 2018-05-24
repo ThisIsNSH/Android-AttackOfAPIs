@@ -9,6 +9,9 @@
     <string name="tnc2">privacy policy &amp; terms of service.</string>
     <string name="client_id"></string>
 
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string-array name="navigation_drawer_items_array">
+        <item>Dashboard</item>
+        <item>Google Cloud Video Intelligence</item>
+        <item>AWS Rekognition</item>
+    </string-array>
 </resources>

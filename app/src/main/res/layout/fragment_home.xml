@@ -1,0 +1,101 @@
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#111"
+    android:orientation="vertical"
+    tools:context="com.nsh.pucho.HomeFrag">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <android.support.v7.widget.Toolbar
+            android:layout_width="match_parent"
+            android:layout_height="80dp"
+
+            android:background="#000"
+            android:elevation="4dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="16dp"
+                android:layout_marginTop="16dp"
+                android:fontFamily="@font/psb"
+                android:text="Home"
+                android:textColor="#fff"
+                android:textSize="30sp" />
+        </android.support.v7.widget.Toolbar>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:gravity="center">
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/acc_pic"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_margin="16dp"
+                android:src="@color/colorPrimary" />
+
+            <TextView
+                android:id="@+id/acc_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="16dp"
+                android:layout_toRightOf="@id/acc_pic"
+                android:fontFamily="@font/psb"
+                android:text="Name"
+                android:textColor="#fff"
+                android:textSize="25sp" />
+
+            <TextView
+                android:id="@+id/sign_out"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/acc_name"
+                android:layout_gravity="center_horizontal"
+                android:layout_toRightOf="@id/acc_pic"
+                android:fontFamily="@font/ps"
+                android:text="Signout"
+                android:textColor="#fff"
+                android:textSize="20sp" />
+        </RelativeLayout>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="16dp"
+            android:fontFamily="@font/psb"
+            android:text="Recommended"
+            android:textColor="#fff"
+            android:textSize="25sp" />
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/reco_rec"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"></android.support.v7.widget.RecyclerView>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="16dp"
+            android:fontFamily="@font/psb"
+            android:text="Recent Activity"
+            android:textColor="#fff"
+            android:textSize="25sp" />
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/rece_rec"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"></android.support.v7.widget.RecyclerView>
+
+    </LinearLayout>
+</ScrollView>
+

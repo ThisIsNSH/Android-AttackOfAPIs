@@ -8,4 +8,7 @@
     <string name="tnc1">By logging in you agree to our</string>
     <string name="tnc2">privacy policy &amp; terms of service.</string>
     <string name="client_id"></string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

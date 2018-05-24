@@ -1,49 +1,34 @@
 package com.nsh.pucho;
 
-import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
+import android.support.v7.widget.DefaultItemAnimator;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.nsh.pucho.Adapter.CardAdapter;
 
-/**
- * A simple {@link Fragment} subclass.
- * Activities that contain this fragment must implement the
- * {@link AwsFrag.OnFragmentInteractionListener} interface
- * to handle interaction events.
- * Use the {@link AwsFrag#newInstance} factory method to
- * create an instance of this fragment.
- */
+import java.util.ArrayList;
+import java.util.List;
+
 public class AwsFrag extends Fragment {
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
-
-    // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
-
     private OnFragmentInteractionListener mListener;
+    private List<Card> cardList1 = new ArrayList<>();
+    private List<Card> cardList = new ArrayList<>();
+    private RecyclerView aws_media_rec, use_own_rec;
+    private CardAdapter mCardAdapter, mCardAdapter1;
 
     public AwsFrag() {
-        // Required empty public constructor
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment AwsFrag.
-     */
-    // TODO: Rename and change types and number of parameters
     public static AwsFrag newInstance(String param1, String param2) {
         AwsFrag fragment = new AwsFrag();
         Bundle args = new Bundle();
@@ -65,49 +50,62 @@ public class AwsFrag extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        View view =  inflater.inflate(R.layout.fragment_aws, container, false);
+
+        View view = inflater.inflate(R.layout.fragment_aws, container, false);
+
+        aws_media_rec = view.findViewById(R.id.aws_media_rec);
+        use_own_rec = view.findViewById(R.id.use_own_rec);
+
+        mCardAdapter = new CardAdapter(getContext(), cardList);
+        mCardAdapter1 = new CardAdapter(getContext(), cardList1);
+
+        LinearLayoutManager mLayoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
+        LinearLayoutManager mLayoutManager1 = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
+
+        aws_media_rec.setLayoutManager(mLayoutManager);
+        use_own_rec.setLayoutManager(mLayoutManager1);
+
+        aws_media_rec.setItemAnimator(new DefaultItemAnimator());
+        aws_media_rec.setAdapter(mCardAdapter);
+
+        use_own_rec.setItemAnimator(new DefaultItemAnimator());
+        use_own_rec.setAdapter(mCardAdapter1);
+
+        prepareCardData();
+        prepareCard1Data();
         return view;
     }
 
-    // TODO: Rename method, update argument and hook method into UI event
+    private void prepareCardData() {
+
+        Card card = new Card("Shah Rukh Khan", "https://resize.indiatvnews.com/en/centered/newbucket/715_431/2018/01/shah-rukh-fea1-1516593905.jpg", "Celebrity Recognition");
+        cardList.add(card);
+
+        card = new Card("Mountain Biking", "https://cdnmos-bikeradar.global.ssl.fastly.net/images/bikes-and-gear/bikes/mountain-bikes/full-suspension/wb_mtb_04-50-1491239031133-16ide61wxdjft-630-354.jpg", "Object Detection");
+        cardList.add(card);
+
+        card = new Card("Skateboarding", "https://dhei5unw3vrsx.cloudfront.net/images/skateboard_resized.jpg", "Object & Scene Detection");
+        cardList.add(card);
+
+        card = new Card("City Landscape", "https://dhei5unw3vrsx.cloudfront.net/images/city_resized.jpg", "Object & Scene Detection");
+        cardList.add(card);
+
+        mCardAdapter.notifyDataSetChanged();
+    }
+
+    private void prepareCard1Data() {
+        Card card = new Card("Not supported", "https://cdn.shopify.com/s/files/1/1367/8297/products/CLOTHES_1024x1024.jpg", "Feature not available");
+        cardList1.add(card);
+        mCardAdapter1.notifyDataSetChanged();
+    }
+
     public void onButtonPressed(Uri uri) {
         if (mListener != null) {
             mListener.onFragmentInteraction(uri);
         }
     }
-/*
 
-    @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-        if (context instanceof OnFragmentInteractionListener) {
-            mListener = (OnFragmentInteractionListener) context;
-        } else {
-            throw new RuntimeException(context.toString()
-                    + " must implement OnFragmentInteractionListener");
-        }
-    }
-
-    @Override
-    public void onDetach() {
-        super.onDetach();
-        mListener = null;
-    }
-*/
-
-    /**
-     * This interface must be implemented by activities that contain this
-     * fragment to allow an interaction in this fragment to be communicated
-     * to the activity and potentially other fragments contained in that
-     * activity.
-     * <p>
-     * See the Android Training lesson <a href=
-     * "http://developer.android.com/training/basics/fragments/communicating.html"
-     * >Communicating with Other Fragments</a> for more information.
-     */
     public interface OnFragmentInteractionListener {
-        // TODO: Update argument type and name
         void onFragmentInteraction(Uri uri);
     }
 }

@@ -28,17 +28,20 @@ public class DashActivity extends AppCompatActivity {
 
 JSONObject jsonRequest;
 
+String api;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dash);
         final TextView a = findViewById(R.id.abc);
+        //api = getString(R.string.api);
         String input3="gs://demomaker/gbikes_dinosaur.mp4";
         String input2="gs://demomaker/gbikes_dinosaur.mp4";
         String input1="gs://demomaker/cat.mp4";
-        label(input1);
-        shot(input2);
-        explicit(input3);
+        //label(input2);
+        //shot(input2);
+        explicit(input2);
+
 
     }
 
@@ -47,7 +50,7 @@ JSONObject jsonRequest;
         Network network = new BasicNetwork(new HurlStack());
         RequestQueue queue = new RequestQueue(cache, network);
         queue.start();
-        String url = "https://videointelligence.googleapis.com/v1/videos:annotate?key=XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX";
+        String url = "https://videointelligence.googleapis.com/v1/videos:annotate?key="+api;
         try {
             jsonRequest = new JSONObject("{\n" +
                     "  \"inputUri\": \"" + input + "\",\n" +
@@ -63,7 +66,7 @@ JSONObject jsonRequest;
                 try {
                     String name = response.getString("name");
                     //name = "us-west1.11303815698753239074";
-                    final String url1 = "https://videointelligence.googleapis.com/v1/operations/" + name + "?key=XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX";
+                    final String url1 = "https://videointelligence.googleapis.com/v1/operations/" + name + "?key="+api;
                     final Handler handler = new Handler();
                     System.out.println(url1);
                     handler.postDelayed(new Runnable() {
@@ -137,7 +140,7 @@ JSONObject jsonRequest;
         RequestQueue queue = new RequestQueue(cache, network);
         queue.start();
 
-        String url = "https://videointelligence.googleapis.com/v1/videos:annotate?key=xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx";
+        String url = "https://videointelligence.googleapis.com/v1/videos:annotate?key="+api;
         try {
             jsonRequest = new JSONObject("{\n" +
                     "  \"inputUri\": \"" + input + "\",\n" +
@@ -152,7 +155,7 @@ JSONObject jsonRequest;
                 System.out.println(response);
                 try {
                     String name = response.getString("name");
-                    final String url1 = "https://videointelligence.googleapis.com/v1/operations/" + name + "?key=XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX";
+                    final String url1 = "https://videointelligence.googleapis.com/v1/operations/" + name + "?key="+api;
                     final Handler handler = new Handler();
                     System.out.println(url1);
                     handler.postDelayed(new Runnable() {
@@ -204,7 +207,7 @@ JSONObject jsonRequest;
         RequestQueue queue = new RequestQueue(cache, network);
         queue.start();
 
-        String url = "https://videointelligence.googleapis.com/v1/videos:annotate?key=XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX";
+        String url = "https://videointelligence.googleapis.com/v1/videos:annotate?key="+api;
         try {
             jsonRequest = new JSONObject("{\n" +
                     "  \"inputUri\": \"" + input + "\",\n" +
@@ -219,7 +222,7 @@ JSONObject jsonRequest;
                 System.out.println(response);
                 try {
                     String name = response.getString("name");
-                    final String url1 = "https://videointelligence.googleapis.com/v1/operations/" + name + "?key=XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX";
+                    final String url1 = "https://videointelligence.googleapis.com/v1/operations/" + name + "?key="+api;
                     final Handler handler = new Handler();
                     System.out.println(url1);
                     handler.postDelayed(new Runnable() {

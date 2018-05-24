@@ -63,14 +63,20 @@ public class HomeFrag extends Fragment implements View.OnClickListener {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_home, container, false);
+        recView(view);
+        return view;
+    }
+
+    private void recView(View view) {
+
         reco_rec = view.findViewById(R.id.reco_rec);
         acc_img = view.findViewById(R.id.acc_pic);
         acc_name = view.findViewById(R.id.acc_name);
         sign_out = view.findViewById(R.id.sign_out);
 
-        acc_name.setText(new LoginActivity().getName());
-        Picasso.with(getContext()).load(new LoginActivity().getURI()).into(acc_img);
-        sign_out.setOnClickListener(this);
+        //acc_name.setText(new LoginActivity().getName());
+        //Picasso.with(getContext()).load(new LoginActivity().getURI()).into(acc_img);
+        //sign_out.setOnClickListener(this);
 
         mCardAdapter = new CardAdapter(getContext(), cardList);
         LinearLayoutManager mLayoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
@@ -80,7 +86,6 @@ public class HomeFrag extends Fragment implements View.OnClickListener {
         reco_rec.setAdapter(mCardAdapter);
         prepareRecoData();
 
-        return view;
     }
 
     private void prepareRecoData() {
@@ -98,7 +103,6 @@ public class HomeFrag extends Fragment implements View.OnClickListener {
 
         mCardAdapter.notifyDataSetChanged();
     }
-
 
     public void onButtonPressed(Uri uri) {
         if (mListener != null) {

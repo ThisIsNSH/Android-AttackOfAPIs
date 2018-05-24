@@ -19,16 +19,17 @@
             android:name=".Activity.LoginActivity"
             android:configChanges="keyboard|keyboardHidden|screenLayout|screenSize|orientation"
             android:theme="@style/AppTheme1">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
 
         <activity android:name=".Activity.DashActivity" />
         <activity android:name=".Activity.AwsActivity" />
-        <activity android:name=".Activity.MainActivity" />
+        <activity android:name=".Activity.MainActivity" ><intent-filter>
+        <action android:name="android.intent.action.MAIN" />
+
+        <category android:name="android.intent.category.LAUNCHER" />
+    </intent-filter>
+        </activity>
 
     </application>
 

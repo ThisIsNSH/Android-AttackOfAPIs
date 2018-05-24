@@ -50,7 +50,7 @@ public class LoginActivity extends AppCompatActivity {
     TextView l_title;
     ProgressBar load;
     ImageButton google_in, facebook;
-    public static GoogleSignInClient mGoogleSignInClient;
+    GoogleSignInClient mGoogleSignInClient;
     private FirebaseAuth mAuth;
     private CallbackManager mCallbackManager;
 

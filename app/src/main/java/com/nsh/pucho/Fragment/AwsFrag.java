@@ -12,6 +12,7 @@ import android.view.ViewGroup;
 
 import com.nsh.pucho.Adapter.CardAdapter;
 import com.nsh.pucho.Extra.Card;
+import com.nsh.pucho.Extra.Sample;
 import com.nsh.pucho.R;
 
 import java.util.ArrayList;
@@ -27,7 +28,7 @@ public class AwsFrag extends Fragment {
     private List<Card> cardList = new ArrayList<>();
     private RecyclerView aws_media_rec, use_own_rec;
     private CardAdapter mCardAdapter, mCardAdapter1;
-
+    private Sample sample = new Sample();
     public AwsFrag() {
     }
 
@@ -54,6 +55,17 @@ public class AwsFrag extends Fragment {
                              Bundle savedInstanceState) {
 
         View view = inflater.inflate(R.layout.fragment_aws, container, false);
+        recView(view);
+
+        System.out.println(sample.aws1r());
+        System.out.println(sample.aws2r());
+        System.out.println(sample.aws3r());
+        System.out.println(sample.aws4r());
+
+        return view;
+    }
+
+    private void recView(View view) {
 
         aws_media_rec = view.findViewById(R.id.aws_media_rec);
         use_own_rec = view.findViewById(R.id.use_own_rec);
@@ -75,7 +87,7 @@ public class AwsFrag extends Fragment {
 
         prepareCardData();
         prepareCard1Data();
-        return view;
+
     }
 
     private void prepareCardData() {

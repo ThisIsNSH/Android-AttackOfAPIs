@@ -12,6 +12,7 @@ import android.view.ViewGroup;
 
 import com.nsh.pucho.Adapter.CardAdapter;
 import com.nsh.pucho.Extra.Card;
+import com.nsh.pucho.Extra.Sample;
 import com.nsh.pucho.R;
 
 import java.util.ArrayList;
@@ -27,6 +28,7 @@ public class CviFrag extends Fragment {
     private List<Card> cardList = new ArrayList<>();
     private RecyclerView cvi_media_rec, use_own_rec1;
     private CardAdapter mCardAdapter, mCardAdapter1;
+    private Sample sample = new Sample();
 
     public CviFrag() {
     }
@@ -53,6 +55,17 @@ public class CviFrag extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_cvi, container, false);
+        recView(view);
+        System.out.println(sample.cvi11r());
+        System.out.println(sample.cvi12r());
+        System.out.println(sample.cvi13r());
+        System.out.println(sample.cvi21r());
+        System.out.println(sample.cvi22r());
+        System.out.println(sample.cvi23r());
+        return view;
+    }
+
+    private void recView(View view) {
 
         cvi_media_rec = view.findViewById(R.id.cvi_media_rec);
         use_own_rec1 = view.findViewById(R.id.use_own_rec1);
@@ -74,7 +87,6 @@ public class CviFrag extends Fragment {
 
         prepareCardData();
         prepareCard1Data();
-        return view;
     }
 
     private void prepareCardData() {

@@ -5,12 +5,10 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.nsh.pucho.Extra.Recent;
+import com.nsh.pucho.Database.Recent;
 import com.nsh.pucho.R;
-import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
@@ -27,7 +25,7 @@ public class RecentAdapter extends RecyclerView.Adapter<RecentAdapter.MyViewHold
     @Override
     public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View itemView = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.card_layout, parent, false);
+                .inflate(R.layout.card_layout1, parent, false);
 
         return new MyViewHolder(itemView);
     }
@@ -36,7 +34,7 @@ public class RecentAdapter extends RecyclerView.Adapter<RecentAdapter.MyViewHold
     public void onBindViewHolder(MyViewHolder holder, int position) {
         Recent note = notesList.get(position);
         holder.name.setText(note.getName());
-        Picasso.with(context).load(note.getUrl()).into(holder.img);
+        //    Picasso.with(context).load(note.getUrl()).into(holder.img);
         holder.function.setText(note.getFunction());
     }
 
@@ -47,12 +45,12 @@ public class RecentAdapter extends RecyclerView.Adapter<RecentAdapter.MyViewHold
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
         public TextView name, function;
-        public ImageView img;
+//        public ImageView img;
 
 
         public MyViewHolder(View view) {
             super(view);
-            img = view.findViewById(R.id.reco_img);
+            //          img = view.findViewById(R.id.reco_img);
             name = view.findViewById(R.id.reco_name);
             function = view.findViewById(R.id.reco_function);
 

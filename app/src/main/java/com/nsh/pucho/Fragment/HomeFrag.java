@@ -1,26 +1,33 @@
 package com.nsh.pucho.Fragment;
 
+import android.app.Dialog;
 import android.content.Intent;
+import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.nsh.pucho.Activity.LoginActivity;
 import com.nsh.pucho.Adapter.CardAdapter;
+import com.nsh.pucho.Adapter.LabelAdapter;
 import com.nsh.pucho.Adapter.RecentAdapter;
 import com.nsh.pucho.Extra.Card;
-import com.nsh.pucho.Extra.DatabaseHelper;
-import com.nsh.pucho.Extra.Recent;
+import com.nsh.pucho.Database.DatabaseHelper;
+import com.nsh.pucho.Database.Recent;
+import com.nsh.pucho.Listener.RecyclerTouchListener;
 import com.nsh.pucho.R;
+import com.xiaofeng.flowlayoutmanager.FlowLayoutManager;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -104,6 +111,19 @@ public class HomeFrag extends Fragment implements View.OnClickListener {
         reco_rec.setAdapter(mCardAdapter);
         prepareRecoData();
 
+        recyclerView.addOnItemTouchListener(new RecyclerTouchListener(getContext(), recyclerView, new RecyclerTouchListener.ClickListener() {
+            @Override
+            public void onClick(View view, int position) {
+                Recent card = notesList.get(position);
+                Toast.makeText(getContext(), card.getName(), Toast.LENGTH_SHORT).show();
+
+            }
+
+            @Override
+            public void onLongClick(View view, int position) {
+
+            }
+        }));
     }
 
     public void createRecent(String name, String url, String function) {

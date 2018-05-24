@@ -54,10 +54,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="16dp"
-            android:fontFamily="@font/psb"
+            android:fontFamily="@font/ps"
             android:text="Recommended"
             android:textColor="@color/text"
-            android:textSize="25sp" />
+            android:textSize="20sp" />
 
         <android.support.v7.widget.RecyclerView
             android:id="@+id/reco_rec"
@@ -68,10 +68,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="16dp"
-            android:fontFamily="@font/psb"
+            android:fontFamily="@font/ps"
             android:text="Recent Activity"
             android:textColor="@color/text"
-            android:textSize="25sp" />
+            android:textSize="20sp" />
 
         <android.support.v7.widget.RecyclerView
             android:id="@+id/rece_rec"

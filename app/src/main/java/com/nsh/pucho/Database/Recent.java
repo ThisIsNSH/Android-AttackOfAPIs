@@ -1,4 +1,4 @@
-package com.nsh.pucho.Extra;
+package com.nsh.pucho.Database;
 
 public class Recent {
     public static final String TABLE_NAME = "recent";

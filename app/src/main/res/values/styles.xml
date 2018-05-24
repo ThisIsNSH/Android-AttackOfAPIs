@@ -11,6 +11,8 @@
     <item name="colorAccent">#fff</item>
     <item name="android:windowTranslucentStatus">true</item>
     <item name="android:windowTranslucentNavigation">true</item>
-
 </style>
+    <style name="AppTheme2" parent="ThemeOverlay.AppCompat.Dark.ActionBar">
+        <item name="android:fontFamily">@font/psb</item>
+    </style>
 </resources>

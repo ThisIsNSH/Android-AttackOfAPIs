@@ -1,4 +1,4 @@
-package com.nsh.pucho.Extra;
+package com.nsh.pucho.Database;
 
 import android.content.ContentValues;
 import android.content.Context;

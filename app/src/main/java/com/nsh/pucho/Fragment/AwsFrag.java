@@ -1,7 +1,6 @@
 package com.nsh.pucho.Fragment;
 
 import android.app.Dialog;
-import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
@@ -14,11 +13,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
-import android.widget.Toast;
 
 import com.nsh.pucho.Adapter.CardAdapter;
 import com.nsh.pucho.Adapter.LabelAdapter;
 import com.nsh.pucho.Extra.Card;
+import com.nsh.pucho.Database.DatabaseHelper;
 import com.nsh.pucho.Extra.Label;
 import com.nsh.pucho.Listener.RecyclerTouchListener;
 import com.nsh.pucho.Extra.Sample;
@@ -125,21 +124,10 @@ public class AwsFrag extends Fragment {
                 labelList.clear();
                 prepareLabelData(position);
 
-                mydatabase.execSQL("CREATE TABLE IF NOT EXISTS Recent(name VARCHAR,function VARCHAR);");
-                mydatabase.execSQL("INSERT INTO Recent VALUES(\'" + card.getName() + "\',\'" + card.getFunction() + "\');");
+                DatabaseHelper n = new DatabaseHelper(getContext());
+                n.insertRecent(card.getName(),card.getImg(),card.getFunction());
 
-                Cursor cursor = mydatabase.rawQuery("Select * from Recent", null);
-                if (cursor.moveToFirst()) {
-                    do {
-                        String name = cursor.getString(cursor.getColumnIndex("name"));
-                        String function = cursor.getString(cursor.getColumnIndex("function"));
-                        System.out.println("name " + name + " function " + function);
-                        // do what ever you want here
-                    } while (cursor.moveToNext());
-                }
-                cursor.close();
-
-                Toast.makeText(getContext(), card.getName() + " is selected!", Toast.LENGTH_SHORT).show();
+                //Toast.makeText(getContext(), card.getName() + " is selected!", Toast.LENGTH_SHORT).show();
 
 
             }

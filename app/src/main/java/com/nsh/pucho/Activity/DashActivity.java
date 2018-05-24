@@ -26,18 +26,19 @@ import java.util.ArrayList;
 
 public class DashActivity extends AppCompatActivity {
 
-JSONObject jsonRequest;
+    JSONObject jsonRequest;
 
-String api;
+    String api;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dash);
         final TextView a = findViewById(R.id.abc);
         //api = getString(R.string.api);
-        String input3="gs://demomaker/gbikes_dinosaur.mp4";
-        String input2="gs://demomaker/gbikes_dinosaur.mp4";
-        String input1="gs://demomaker/cat.mp4";
+        String input3 = "gs://demomaker/gbikes_dinosaur.mp4";
+        String input2 = "gs://demomaker/gbikes_dinosaur.mp4";
+        String input1 = "gs://demomaker/cat.mp4";
         //label(input2);
         //shot(input2);
         explicit(input2);
@@ -50,7 +51,7 @@ String api;
         Network network = new BasicNetwork(new HurlStack());
         RequestQueue queue = new RequestQueue(cache, network);
         queue.start();
-        String url = "https://videointelligence.googleapis.com/v1/videos:annotate?key="+api;
+        String url = "https://videointelligence.googleapis.com/v1/videos:annotate?key=" + api;
         try {
             jsonRequest = new JSONObject("{\n" +
                     "  \"inputUri\": \"" + input + "\",\n" +
@@ -66,7 +67,7 @@ String api;
                 try {
                     String name = response.getString("name");
                     //name = "us-west1.11303815698753239074";
-                    final String url1 = "https://videointelligence.googleapis.com/v1/operations/" + name + "?key="+api;
+                    final String url1 = "https://videointelligence.googleapis.com/v1/operations/" + name + "?key=" + api;
                     final Handler handler = new Handler();
                     System.out.println(url1);
                     handler.postDelayed(new Runnable() {
@@ -140,7 +141,7 @@ String api;
         RequestQueue queue = new RequestQueue(cache, network);
         queue.start();
 
-        String url = "https://videointelligence.googleapis.com/v1/videos:annotate?key="+api;
+        String url = "https://videointelligence.googleapis.com/v1/videos:annotate?key=" + api;
         try {
             jsonRequest = new JSONObject("{\n" +
                     "  \"inputUri\": \"" + input + "\",\n" +
@@ -155,7 +156,7 @@ String api;
                 System.out.println(response);
                 try {
                     String name = response.getString("name");
-                    final String url1 = "https://videointelligence.googleapis.com/v1/operations/" + name + "?key="+api;
+                    final String url1 = "https://videointelligence.googleapis.com/v1/operations/" + name + "?key=" + api;
                     final Handler handler = new Handler();
                     System.out.println(url1);
                     handler.postDelayed(new Runnable() {
@@ -188,7 +189,7 @@ String api;
             @Override
             public void onResponse(final JSONObject response) {
 
-                    System.out.println(response);
+                System.out.println(response);
 
 
             }
@@ -207,7 +208,7 @@ String api;
         RequestQueue queue = new RequestQueue(cache, network);
         queue.start();
 
-        String url = "https://videointelligence.googleapis.com/v1/videos:annotate?key="+api;
+        String url = "https://videointelligence.googleapis.com/v1/videos:annotate?key=" + api;
         try {
             jsonRequest = new JSONObject("{\n" +
                     "  \"inputUri\": \"" + input + "\",\n" +
@@ -222,7 +223,7 @@ String api;
                 System.out.println(response);
                 try {
                     String name = response.getString("name");
-                    final String url1 = "https://videointelligence.googleapis.com/v1/operations/" + name + "?key="+api;
+                    final String url1 = "https://videointelligence.googleapis.com/v1/operations/" + name + "?key=" + api;
                     final Handler handler = new Handler();
                     System.out.println(url1);
                     handler.postDelayed(new Runnable() {

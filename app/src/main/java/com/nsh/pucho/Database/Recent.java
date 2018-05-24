@@ -7,13 +7,6 @@ public class Recent {
     public static final String COLUMN_NAME = "name";
     public static final String COLUMN_URL = "url";
     public static final String COLUMN_FUNCTION = "function";
-
-    private int id;
-    private String name;
-    private String url;
-    private String function;
-
-
     // Create table SQL query
     public static final String CREATE_TABLE =
             "CREATE TABLE " + TABLE_NAME + "("
@@ -22,24 +15,28 @@ public class Recent {
                     + COLUMN_URL + " VARCHAR,"
                     + COLUMN_FUNCTION + " VARCHAR"
                     + ")";
+    private int id;
+    private String name;
+    private String url;
+    private String function;
 
     public Recent() {
     }
 
-    public Recent(int id, String name,String url, String function) {
+    public Recent(int id, String name, String url, String function) {
         this.id = id;
-        this.name= name;
+        this.name = name;
         this.url = url;
         this.function = function;
-    }
-
-    public void setId(int id) {
-        this.id = id;
     }
 
     public int getId() {
 
         return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getFunction() {

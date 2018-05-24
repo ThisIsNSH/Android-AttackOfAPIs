@@ -16,11 +16,11 @@ import android.view.Window;
 
 import com.nsh.pucho.Adapter.CardAdapter;
 import com.nsh.pucho.Adapter.LabelAdapter;
-import com.nsh.pucho.Extra.Card;
 import com.nsh.pucho.Database.DatabaseHelper;
+import com.nsh.pucho.Extra.Card;
 import com.nsh.pucho.Extra.Label;
-import com.nsh.pucho.Listener.RecyclerTouchListener;
 import com.nsh.pucho.Extra.Sample;
+import com.nsh.pucho.Listener.RecyclerTouchListener;
 import com.nsh.pucho.R;
 import com.xiaofeng.flowlayoutmanager.FlowLayoutManager;
 
@@ -125,7 +125,7 @@ public class AwsFrag extends Fragment {
                 prepareLabelData(position);
 
                 DatabaseHelper n = new DatabaseHelper(getContext());
-                n.insertRecent(card.getName(),card.getImg(),card.getFunction());
+                n.insertRecent(card.getName(), card.getImg(), card.getFunction());
 
                 //Toast.makeText(getContext(), card.getName() + " is selected!", Toast.LENGTH_SHORT).show();
 

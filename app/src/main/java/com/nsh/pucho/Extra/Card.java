@@ -5,14 +5,16 @@ package com.nsh.pucho.Extra;
  */
 
 public class Card {
-    public String name,img,function;
-    public Card(){
+    public String name, img, function;
+
+    public Card() {
 
     }
-    public Card(String name, String img, String function){
-        this.name=name;
-        this.img=img;
-        this.function=function;
+
+    public Card(String name, String img, String function) {
+        this.name = name;
+        this.img = img;
+        this.function = function;
     }
 
     public String getFunction() {

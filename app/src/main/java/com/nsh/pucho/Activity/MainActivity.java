@@ -1,6 +1,5 @@
 package com.nsh.pucho.Activity;
 
-import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -15,22 +14,22 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 
 import com.nsh.pucho.Adapter.DrawerItemCustomAdapter;
+import com.nsh.pucho.Extra.DataModel;
 import com.nsh.pucho.Fragment.AwsFrag;
 import com.nsh.pucho.Fragment.CviFrag;
-import com.nsh.pucho.Extra.DataModel;
 import com.nsh.pucho.Fragment.HomeFrag;
 import com.nsh.pucho.R;
 
 public class MainActivity extends AppCompatActivity {
 
     LinearLayout linearLayout;
+    Toolbar toolbar;
+    android.support.v7.app.ActionBarDrawerToggle mDrawerToggle;
     private String[] mNavigationDrawerItemTitles;
     private DrawerLayout mDrawerLayout;
     private ListView mDrawerList;
-    Toolbar toolbar;
     private CharSequence mDrawerTitle;
     private CharSequence mTitle;
-    android.support.v7.app.ActionBarDrawerToggle mDrawerToggle;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,15 +57,6 @@ public class MainActivity extends AppCompatActivity {
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         mDrawerLayout.setDrawerListener(mDrawerToggle);
         setupDrawerToggle();
-
-    }
-
-    private class DrawerItemClickListener implements ListView.OnItemClickListener {
-
-        @Override
-        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-            selectItem(position);
-        }
 
     }
 
@@ -100,7 +90,6 @@ public class MainActivity extends AppCompatActivity {
             setTitle(title);
         }
     }
-
 
     private void selectItem(int position) {
 
@@ -166,5 +155,14 @@ public class MainActivity extends AppCompatActivity {
         mDrawerToggle = new android.support.v7.app.ActionBarDrawerToggle(this, mDrawerLayout, toolbar, R.string.app_name, R.string.app_name);
         //This is necessary to change the icon of the Drawer Toggle upon state change.
         mDrawerToggle.syncState();
+    }
+
+    private class DrawerItemClickListener implements ListView.OnItemClickListener {
+
+        @Override
+        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+            selectItem(position);
+        }
+
     }
 }

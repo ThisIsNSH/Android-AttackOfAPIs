@@ -6,11 +6,13 @@ package com.nsh.pucho.Extra;
 
 public class Label {
     String label;
-    public Label(){
+
+    public Label() {
 
     }
-    public Label(String label){
-        this.label=label;
+
+    public Label(String label) {
+        this.label = label;
     }
 
     public String getLabel() {

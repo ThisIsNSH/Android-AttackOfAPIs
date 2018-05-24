@@ -43,9 +43,9 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@id/acc_name"
                 android:layout_toRightOf="@id/acc_pic"
+                android:background="?attr/selectableItemBackgroundBorderless"
                 android:fontFamily="@font/ps"
                 android:text="Signout"
-                android:background="?attr/selectableItemBackgroundBorderless"
                 android:textColor="@color/text"
                 android:textSize="20sp" />
         </RelativeLayout>

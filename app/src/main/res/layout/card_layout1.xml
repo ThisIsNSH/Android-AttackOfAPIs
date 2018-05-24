@@ -3,20 +3,19 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="250dp"
     android:layout_height="wrap_content"
+    android:clickable="true"
+    android:focusable="true"
+    android:foreground="?attr/selectableItemBackgroundBorderless"
     android:orientation="vertical"
     app:cardBackgroundColor="#fff"
     app:cardCornerRadius="15dp"
     app:cardElevation="8dp"
-    android:clickable="true"
-    android:focusable="true"
-    android:foreground="?attr/selectableItemBackgroundBorderless"
     app:cardPreventCornerOverlap="true"
     app:cardUseCompatPadding="true">
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
-
 
 
         <TextView
@@ -43,12 +42,12 @@
 
         <RatingBar
             android:id="@+id/ratingBar1"
-            android:layout_width="wrap_content"
             style="?android:attr/ratingBarStyleIndicator"
-            android:layout_centerHorizontal="true"
-            android:layout_marginBottom="8dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/reco_function"/>
+            android:layout_below="@id/reco_function"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="8dp" />
 
     </RelativeLayout>
 </android.support.v7.widget.CardView>

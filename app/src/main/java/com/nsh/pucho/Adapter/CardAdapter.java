@@ -8,8 +8,8 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.nsh.pucho.R;
 import com.nsh.pucho.Extra.Card;
+import com.nsh.pucho.R;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
@@ -20,22 +20,8 @@ import java.util.List;
 
 public class CardAdapter extends RecyclerView.Adapter<CardAdapter.MyViewHolder> {
 
-    private List<Card> cardList;
     public Context mContext;
-
-    public class MyViewHolder extends RecyclerView.ViewHolder {
-        public TextView name, function;
-        public ImageView img;
-
-
-        public MyViewHolder(View view) {
-            super(view);
-            img = view.findViewById(R.id.reco_img);
-            name = view.findViewById(R.id.reco_name);
-            function = view.findViewById(R.id.reco_function);
-
-        }
-    }
+    private List<Card> cardList;
 
     public CardAdapter(Context mContext, List<Card> cardList) {
         this.cardList = cardList;
@@ -62,5 +48,19 @@ public class CardAdapter extends RecyclerView.Adapter<CardAdapter.MyViewHolder> 
     @Override
     public int getItemCount() {
         return cardList.size();
+    }
+
+    public class MyViewHolder extends RecyclerView.ViewHolder {
+        public TextView name, function;
+        public ImageView img;
+
+
+        public MyViewHolder(View view) {
+            super(view);
+            img = view.findViewById(R.id.reco_img);
+            name = view.findViewById(R.id.reco_name);
+            function = view.findViewById(R.id.reco_function);
+
+        }
     }
 }

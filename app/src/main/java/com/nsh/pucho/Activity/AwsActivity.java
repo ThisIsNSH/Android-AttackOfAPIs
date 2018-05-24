@@ -126,11 +126,11 @@ public class AwsActivity extends AppCompatActivity {
                     .withImage(new Image()
                             .withS3Object(new S3Object()
                                     .withName(photo).withBucket(bucket)));
-DetectFacesResult detectFaceResult;
+            DetectFacesResult detectFaceResult;
 
             detectFaceResult = amazonRekognitionClient.detectFaces(detectFaceRequest);
 
-System.out.println(detectFaceResult.getFaceDetails());
+            System.out.println(detectFaceResult.getFaceDetails());
 
            /* DetectLabelsResult result = rekognitionClient.detectLabels(request);
             //List<DescriptorProtos.FieldDescriptorProto.Label> labels = result.getLabels();

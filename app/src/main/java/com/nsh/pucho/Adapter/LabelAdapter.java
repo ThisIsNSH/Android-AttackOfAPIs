@@ -18,17 +18,8 @@ import java.util.List;
 
 public class LabelAdapter extends RecyclerView.Adapter<LabelAdapter.MyViewHolder> {
 
-    private List<Label> labelList;
     public Context mContext;
-
-    public class MyViewHolder extends RecyclerView.ViewHolder {
-        public TextView tv;
-
-        public MyViewHolder(View view) {
-            super(view);
-            tv = view.findViewById(R.id.label);
-        }
-    }
+    private List<Label> labelList;
 
     public LabelAdapter(List<Label> labelList, Context mContext) {
         this.labelList = labelList;
@@ -47,12 +38,19 @@ public class LabelAdapter extends RecyclerView.Adapter<LabelAdapter.MyViewHolder
         holder.tv.setText(label.getLabel());
     }
 
-
     @Override
     public int getItemCount() {
         return labelList.size();
     }
 
+    public class MyViewHolder extends RecyclerView.ViewHolder {
+        public TextView tv;
+
+        public MyViewHolder(View view) {
+            super(view);
+            tv = view.findViewById(R.id.label);
+        }
+    }
 
 
 }

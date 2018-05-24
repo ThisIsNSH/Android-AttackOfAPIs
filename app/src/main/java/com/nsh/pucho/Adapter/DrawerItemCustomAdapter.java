@@ -6,10 +6,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.nsh.pucho.DataModel;
+import com.nsh.pucho.Extra.DataModel;
 import com.nsh.pucho.R;
 
 public class DrawerItemCustomAdapter extends ArrayAdapter<DataModel> {

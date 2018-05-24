@@ -16,17 +16,20 @@
             android:value="@string/facebook_app_id" />
 
         <activity
-            android:name=".LoginActivity"
-            android:configChanges="keyboard|keyboardHidden|screenLayout|screenSize|orientation"  android:theme="@style/AppTheme1"/>
-        <activity android:name=".DashActivity" />
-        <activity android:name=".AwsActivity"/>
-        <activity android:name=".MainActivity">
+            android:name=".Activity.LoginActivity"
+            android:configChanges="keyboard|keyboardHidden|screenLayout|screenSize|orientation"
+            android:theme="@style/AppTheme1">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <activity android:name=".Activity.DashActivity" />
+        <activity android:name=".Activity.AwsActivity" />
+        <activity android:name=".Activity.MainActivity" />
+
     </application>
 
 </manifest>

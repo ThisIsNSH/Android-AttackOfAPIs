@@ -1,5 +1,6 @@
-package com.nsh.pucho;
+package com.nsh.pucho.Fragment;
 
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -9,14 +10,23 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
+import android.widget.Toast;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.nsh.pucho.Activity.LoginActivity;
 import com.nsh.pucho.Adapter.CardAdapter;
+import com.nsh.pucho.Extra.Card;
+import com.nsh.pucho.R;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import de.hdodenhof.circleimageview.CircleImageView;
 
-public class HomeFrag extends Fragment {
+
+public class HomeFrag extends Fragment implements View.OnClickListener {
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
     private String mParam1;
@@ -24,7 +34,8 @@ public class HomeFrag extends Fragment {
     private List<Card> cardList = new ArrayList<>();
     private RecyclerView reco_rec, rece_rec;
     private CardAdapter mCardAdapter;
-
+    private TextView acc_name, sign_out;
+    private CircleImageView acc_img;
     private OnFragmentInteractionListener mListener;
 
     public HomeFrag() {
@@ -53,6 +64,13 @@ public class HomeFrag extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_home, container, false);
         reco_rec = view.findViewById(R.id.reco_rec);
+        acc_img = view.findViewById(R.id.acc_pic);
+        acc_name = view.findViewById(R.id.acc_name);
+        sign_out = view.findViewById(R.id.sign_out);
+
+        acc_name.setText(new LoginActivity().getName());
+        Picasso.with(getContext()).load(new LoginActivity().getURI()).into(acc_img);
+        sign_out.setOnClickListener(this);
 
         mCardAdapter = new CardAdapter(getContext(), cardList);
         LinearLayoutManager mLayoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
@@ -64,6 +82,7 @@ public class HomeFrag extends Fragment {
 
         return view;
     }
+
     private void prepareRecoData() {
         Card card = new Card("GBikes & Dinosaur", "https://cdn.suwalls.com/wallpapers/fantasy/dinosaur-20061-1920x1080.jpg", "Video Intelligence");
         cardList.add(card);
@@ -81,10 +100,23 @@ public class HomeFrag extends Fragment {
     }
 
 
-
     public void onButtonPressed(Uri uri) {
         if (mListener != null) {
             mListener.onFragmentInteraction(uri);
+        }
+    }
+
+    @Override
+    public void onClick(View view) {
+        switch (view.getId()) {
+            case R.id.sign_out:
+                FirebaseAuth.getInstance().signOut();
+                Toast.makeText(getContext(), "Signout Successfull!", Toast.LENGTH_LONG).show();
+                startActivity(new Intent(getActivity(), LoginActivity.class));
+                getActivity().finish();
+
+            default:
+                break;
         }
     }
 

@@ -4,7 +4,7 @@
     android:layout_height="match_parent"
     android:background="#fff"
     android:orientation="vertical"
-    tools:context="com.nsh.pucho.HomeFrag">
+    tools:context="com.nsh.pucho.Fragment.HomeFrag">
 
     <LinearLayout
         android:layout_width="match_parent"

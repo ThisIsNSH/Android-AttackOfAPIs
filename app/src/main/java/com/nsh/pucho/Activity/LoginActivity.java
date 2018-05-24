@@ -1,4 +1,4 @@
-package com.nsh.pucho;
+package com.nsh.pucho.Activity;
 
 import android.content.Intent;
 import android.os.Build;
@@ -35,6 +35,8 @@ import com.google.firebase.auth.FacebookAuthProvider;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
+import com.google.firebase.auth.UserInfo;
+import com.nsh.pucho.R;
 
 import java.util.Arrays;
 
@@ -42,13 +44,13 @@ import static android.view.View.VISIBLE;
 
 public class LoginActivity extends AppCompatActivity {
 
+    private static final String TAG = "GoogleActivity";
+    private static final int RC_SIGN_IN = 9001;
     public static FirebaseUser user;
     TextView l_title;
     ProgressBar load;
     ImageButton google_in, facebook;
-    GoogleSignInClient mGoogleSignInClient;
-    private static final String TAG = "GoogleActivity";
-    private static final int RC_SIGN_IN = 9001;
+    public static GoogleSignInClient mGoogleSignInClient;
     private FirebaseAuth mAuth;
     private CallbackManager mCallbackManager;
 
@@ -65,11 +67,13 @@ public class LoginActivity extends AppCompatActivity {
         google_in = findViewById(R.id.google);
         load = findViewById(R.id.load);
         l_title = findViewById(R.id.l_title);
+
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .requestIdToken(getString(R.string.client_id))
                 .requestEmail()
                 .build();
         mGoogleSignInClient = GoogleSignIn.getClient(this, gso);
+
         mAuth = FirebaseAuth.getInstance();
 
         FacebookSdk.sdkInitialize(this.getApplicationContext());
@@ -110,18 +114,22 @@ public class LoginActivity extends AppCompatActivity {
         });
     }
 
-    private void signIn() {
+    public void signIn() {
         Intent signInIntent = mGoogleSignInClient.getSignInIntent();
         startActivityForResult(signInIntent, RC_SIGN_IN);
     }
 
-    private void FsignOut() {
+    public void FsignOut() {
         mAuth.signOut();
         LoginManager.getInstance().logOut();
         updateUI(null);
     }
 
-    private void GsignOut() {
+    public void SignOut() {
+        mAuth.signOut();
+    }
+
+    public void GsignOut() {
         mAuth.signOut();
         mGoogleSignInClient.signOut().addOnCompleteListener(this,
                 new OnCompleteListener<Void>() {
@@ -138,6 +146,7 @@ public class LoginActivity extends AppCompatActivity {
         user = mAuth.getCurrentUser();
         updateUI(user);
     }
+
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -185,6 +194,7 @@ public class LoginActivity extends AppCompatActivity {
                         if (task.isSuccessful()) {
                             Log.d(TAG, "signInWithCredential:success");
                             user = mAuth.getCurrentUser();
+
                             updateUI(user);
                         } else {
                             Log.w(TAG, "signInWithCredential:failure", task.getException());
@@ -205,9 +215,9 @@ public class LoginActivity extends AppCompatActivity {
             handler.postDelayed(new Runnable() {
                 @Override
                 public void run() {
-                    startActivity(new Intent(LoginActivity.this, DashActivity.class));
+                    startActivity(new Intent(LoginActivity.this, MainActivity.class));
                 }
-            }, 2500);
+            }, 2000);
             l_title.setVisibility(View.GONE);
             google_in.setVisibility(View.GONE);
             facebook.setVisibility(View.GONE);
@@ -220,6 +230,18 @@ public class LoginActivity extends AppCompatActivity {
             return user.getDisplayName();
         else
             return "null";
+    }
+
+    public String getProvider() {
+        for (UserInfo user : FirebaseAuth.getInstance().getCurrentUser().getProviderData()) {
+            if (user.getProviderId().equals("facebook.com")) {
+                System.out.println("User is signed in with Facebook");
+                return "facebook";
+            } else {
+                return "google";
+            }
+        }
+        return "null";
     }
 
     public String getURI() {

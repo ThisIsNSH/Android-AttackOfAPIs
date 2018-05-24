@@ -9,7 +9,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.nsh.pucho.R;
-import com.nsh.pucho.Card;
+import com.nsh.pucho.Extra.Card;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;

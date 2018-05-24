@@ -1,4 +1,4 @@
-package com.nsh.pucho;
+package com.nsh.pucho.Activity;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -14,6 +14,11 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 
 import com.nsh.pucho.Adapter.DrawerItemCustomAdapter;
+import com.nsh.pucho.Fragment.AwsFrag;
+import com.nsh.pucho.Fragment.CviFrag;
+import com.nsh.pucho.Extra.DataModel;
+import com.nsh.pucho.Fragment.HomeFrag;
+import com.nsh.pucho.R;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -40,7 +45,7 @@ public class MainActivity extends AppCompatActivity {
         DataModel[] drawerItem = new DataModel[3];
 
         drawerItem[0] = new DataModel("Dashboard");
-        drawerItem[1] = new DataModel("Google Cloud Video Intelligence");
+        drawerItem[1] = new DataModel("Cloud Video Intelligence");
         drawerItem[2] = new DataModel("AWS Rekognition");
         getSupportActionBar().setDisplayHomeAsUpEnabled(false);
         getSupportActionBar().setHomeButtonEnabled(true);
@@ -91,7 +96,7 @@ public class MainActivity extends AppCompatActivity {
         if (fragment != null) {
             FragmentManager fragmentManager = getSupportFragmentManager();
             fragmentManager.beginTransaction().replace(R.id.content_frame, fragment).commit();
-            setTitle(mNavigationDrawerItemTitles[position]);
+            setTitle(title);
         }
     }
 

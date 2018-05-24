@@ -1,6 +1,8 @@
 package com.nsh.pucho.Fragment;
 
 import android.app.Dialog;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.os.Bundle;
@@ -30,16 +32,16 @@ public class AwsFrag extends Fragment {
 
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
+    public static int c1 = 0, c2 = 0, c3 = 0, c0 = 0;
+    public SQLiteDatabase mydatabase;
     private String mParam1;
     private String mParam2;
     private OnFragmentInteractionListener mListener;
-
     private List<Card> cardList1 = new ArrayList<>();
     private List<Card> cardList = new ArrayList<>();
     private RecyclerView aws_media_rec, use_own_rec;
     private CardAdapter mCardAdapter, mCardAdapter1;
     private Sample sample = new Sample();
-
     private List<Label> labelList = new ArrayList<>();
     private RecyclerView aws_label;
     private LabelAdapter mLabelAdapter;
@@ -116,15 +118,30 @@ public class AwsFrag extends Fragment {
 
                 FlowLayoutManager flowLayoutManager = new FlowLayoutManager();
                 flowLayoutManager.setAutoMeasureEnabled(true);
-
                 aws_label.setLayoutManager(flowLayoutManager);
-                System.out.println(aws_label);
                 aws_label.setItemAnimator(new DefaultItemAnimator());
                 aws_label.setAdapter(mLabelAdapter);
+
+                labelList.clear();
                 prepareLabelData(position);
 
+                mydatabase.execSQL("CREATE TABLE IF NOT EXISTS Recent(name VARCHAR,function VARCHAR);");
+                mydatabase.execSQL("INSERT INTO Recent VALUES(\'" + card.getName() + "\',\'" + card.getFunction() + "\');");
+
+                Cursor cursor = mydatabase.rawQuery("Select * from Recent", null);
+                if (cursor.moveToFirst()) {
+                    do {
+                        String name = cursor.getString(cursor.getColumnIndex("name"));
+                        String function = cursor.getString(cursor.getColumnIndex("function"));
+                        System.out.println("name " + name + " function " + function);
+                        // do what ever you want here
+                    } while (cursor.moveToNext());
+                }
+                cursor.close();
 
                 Toast.makeText(getContext(), card.getName() + " is selected!", Toast.LENGTH_SHORT).show();
+
+
             }
 
             @Override
@@ -144,7 +161,8 @@ public class AwsFrag extends Fragment {
         Label label;
         switch (a) {
 
-            case 0:
+            case 2:
+                //if (c2 ==1)break;
                 ArrayList<String> x1 = sample.aws1r();
                 for (int i = 0; i < x1.size(); i++) {
                     label = new Label(x1.get(i));
@@ -152,8 +170,10 @@ public class AwsFrag extends Fragment {
                 }
                 System.out.println(labelList);
                 mLabelAdapter.notifyDataSetChanged();
+                c2 = 1;
                 break;
-            case 1:
+            case 3:
+                //if (c3 ==1)break;
                 ArrayList<String> x2 = sample.aws2r();
                 for (int i = 0; i < x2.size(); i++) {
                     label = new Label(x2.get(i));
@@ -161,8 +181,10 @@ public class AwsFrag extends Fragment {
                 }
                 System.out.println(labelList);
                 mLabelAdapter.notifyDataSetChanged();
+                c3 = 1;
                 break;
-            case 2:
+            case 0:
+                //if (c0 ==1)break;
                 ArrayList<String> x3 = sample.aws3r();
                 for (int i = 0; i < x3.size(); i++) {
                     label = new Label(x3.get(i));
@@ -170,8 +192,10 @@ public class AwsFrag extends Fragment {
                 }
                 System.out.println(labelList);
                 mLabelAdapter.notifyDataSetChanged();
+                c0 = 1;
                 break;
-            case 3:
+            case 1:
+                //if (c1 ==1)break;
                 ArrayList<String> x4 = sample.aws4r();
                 for (int i = 0; i < x4.size(); i++) {
                     label = new Label(x4.get(i));
@@ -179,6 +203,7 @@ public class AwsFrag extends Fragment {
                 }
                 System.out.println(labelList);
                 mLabelAdapter.notifyDataSetChanged();
+                c1 = 1;
                 break;
             default:
                 break;

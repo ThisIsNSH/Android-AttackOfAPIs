@@ -991,7 +991,7 @@ public class Sample {
                         .getJSONObject(i)
                         .getString("endTimeOffset"));
 
-                b.add("Start: " + start + " End: " + end);
+                b.add("Start: " + start + "\nEnd: " + end);
             }
         } catch (JSONException e) {
             e.printStackTrace();
@@ -1043,7 +1043,7 @@ public class Sample {
                 end = (a1.getJSONObject(i)
                         .getString("pornographyLikelihood"));
 
-                b.add("Time: " + start + " Pornography: " + end);
+                b.add("Time: " + start + "\nContent: " + end.toLowerCase());
             }
         } catch (JSONException e) {
             e.printStackTrace();
@@ -1136,7 +1136,7 @@ public class Sample {
                 end = (a1.getJSONObject(i)
                         .getString("pornographyLikelihood"));
 
-                b.add("Time: " + start + " Pornography: " + end);
+                b.add("Time: " + start + "\nContent: " + end.toLowerCase());
             }
         } catch (JSONException e) {
             e.printStackTrace();
@@ -1176,7 +1176,7 @@ public class Sample {
                         .getJSONObject(i)
                         .getString("endTimeOffset"));
 
-                b.add("Start: " + start + " End: " + end);
+                b.add("Start: " + start + "\nEnd: " + end);
             }
         } catch (JSONException e) {
             e.printStackTrace();

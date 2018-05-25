@@ -3,27 +3,20 @@
     android:layout_height="wrap_content"
     android:gravity="right"
     android:orientation="vertical"
-    android:paddingBottom="5dp"
+    android:paddingBottom="8dp"
     android:paddingLeft="16dp">
 
-    <!--<TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="You"
-        android:layout_alignParentRight="true"
-        android:layout_marginBottom="5dp"
-        android:layout_marginRight="10dp"
-        android:fontFamily="sans-serif" />-->
     <TextView
         android:id="@+id/message"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
-        android:layout_marginRight="10dp"
+        android:layout_margin="8dp"
         android:background="@drawable/bg_bubble_self"
         android:textIsSelectable="true"
-        android:textSize="14sp"
-        android:textColor="@android:color/white"/>
+        android:textSize="20sp"
+        android:fontFamily="@font/psb"
+        android:textColor="@color/text"/>
 
 
 </LinearLayout>

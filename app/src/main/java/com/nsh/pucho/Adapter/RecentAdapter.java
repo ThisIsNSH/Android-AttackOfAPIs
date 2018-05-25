@@ -5,6 +5,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.RatingBar;
 import android.widget.TextView;
 
 import com.nsh.pucho.Database.Recent;
@@ -34,7 +35,7 @@ public class RecentAdapter extends RecyclerView.Adapter<RecentAdapter.MyViewHold
     public void onBindViewHolder(MyViewHolder holder, int position) {
         Recent note = notesList.get(position);
         holder.name.setText(note.getName());
-        //    Picasso.with(context).load(note.getUrl()).into(holder.img);
+        holder.ratingBar.setRating(Float.parseFloat(note.getUrl()));
         holder.function.setText(note.getFunction());
     }
 
@@ -45,15 +46,14 @@ public class RecentAdapter extends RecyclerView.Adapter<RecentAdapter.MyViewHold
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
         public TextView name, function;
-//        public ImageView img;
+        public RatingBar ratingBar;
 
 
         public MyViewHolder(View view) {
             super(view);
-            //          img = view.findViewById(R.id.reco_img);
             name = view.findViewById(R.id.reco_name);
             function = view.findViewById(R.id.reco_function);
-
+            ratingBar = view.findViewById(R.id.ratingBar1);
         }
     }
 

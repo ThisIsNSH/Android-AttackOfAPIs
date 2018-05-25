@@ -17,4 +17,8 @@
     <style name="AppTheme2" parent="ThemeOverlay.AppCompat.Dark.ActionBar">
         <item name="android:fontFamily">@font/psb</item>
     </style>
+
+    <style name="AppTheme3" parent="AppTheme">
+        <item name="colorAccent">#FFDF00</item>
+    </style>
 </resources>

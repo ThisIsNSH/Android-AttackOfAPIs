@@ -1,6 +1,7 @@
 package com.nsh.pucho.Fragment;
 
 import android.app.Dialog;
+import android.content.DialogInterface;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
@@ -13,6 +14,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
+import android.widget.RatingBar;
+import android.widget.Toast;
 
 import com.nsh.pucho.Adapter.CardAdapter;
 import com.nsh.pucho.Adapter.LabelAdapter;
@@ -33,6 +36,7 @@ public class AwsFrag extends Fragment {
     private static final String ARG_PARAM2 = "param2";
     public static int c1 = 0, c2 = 0, c3 = 0, c0 = 0;
     public SQLiteDatabase mydatabase;
+    String rating_value;
     private String mParam1;
     private String mParam2;
     private OnFragmentInteractionListener mListener;
@@ -102,7 +106,7 @@ public class AwsFrag extends Fragment {
         aws_media_rec.addOnItemTouchListener(new RecyclerTouchListener(getContext(), aws_media_rec, new RecyclerTouchListener.ClickListener() {
             @Override
             public void onClick(View view, int position) {
-                Card card = cardList.get(position);
+                final Card card = cardList.get(position);
                 final Dialog dialog = new Dialog(getContext());
                 dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
                 dialog.setContentView(R.layout.card_aws);
@@ -124,8 +128,40 @@ public class AwsFrag extends Fragment {
                 labelList.clear();
                 prepareLabelData(position);
 
-                DatabaseHelper n = new DatabaseHelper(getContext());
-                n.insertRecent(card.getName(), card.getImg(), card.getFunction());
+
+                dialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
+                    public void onDismiss(DialogInterface dialog) {
+                        final Dialog dialog1 = new Dialog(getContext());
+                        dialog1.requestWindowFeature(Window.FEATURE_NO_TITLE);
+                        dialog1.setContentView(R.layout.card_star);
+                        dialog1.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
+                        //dialog1.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+                        dialog1.show();
+
+                        RatingBar ratingBar = dialog1.findViewById(R.id.ratingBar);
+                        ratingBar.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener() {
+                            @Override
+                            public void onRatingChanged(RatingBar ratingBar, float v, boolean b) {
+                                if (v > 0)
+                                    rating_value = String.valueOf(v);
+                                else
+                                    rating_value = String.valueOf(0);
+                            }
+                        });
+
+                        dialog1.setOnDismissListener(new DialogInterface.OnDismissListener() {
+                            @Override
+                            public void onDismiss(DialogInterface dialogInterface) {
+                                Toast.makeText(getContext(), "Thanks for the feedback", Toast.LENGTH_SHORT).show();
+                                DatabaseHelper n = new DatabaseHelper(getContext());
+                                n.insertRecent(card.getName(), rating_value, card.getFunction());
+
+                            }
+                        });
+
+                    }
+                });
+
 
                 //Toast.makeText(getContext(), card.getName() + " is selected!", Toast.LENGTH_SHORT).show();
 

@@ -9,6 +9,9 @@
     <string name="tnc2">privacy policy &amp; terms of service.</string>
     <string name="client_id"></string>
 
+    <string name="no_recent">No Recent Activtiy</string>
+    <string name="recent">Recent Activity</string>
+
     <string-array name="navigation_drawer_items_array">
         <item>Dashboard</item>
         <item>Google Cloud Video Intelligence</item>

@@ -15,6 +15,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
+            android:background="#f3f3f3"
+            android:layout_marginBottom="16dp"
             android:gravity="center">
 
             <de.hdodenhof.circleimageview.CircleImageView
@@ -55,7 +57,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="16dp"
             android:fontFamily="@font/ps"
-            android:text="Recommended"
+            android:text="What is this?"
             android:textColor="@color/text"
             android:textSize="20sp" />
 
@@ -68,6 +70,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="16dp"
+            android:layout_marginTop="16dp"
+            android:id="@+id/rec_tex"
             android:fontFamily="@font/ps"
             android:text="Recent Activity"
             android:textColor="@color/text"

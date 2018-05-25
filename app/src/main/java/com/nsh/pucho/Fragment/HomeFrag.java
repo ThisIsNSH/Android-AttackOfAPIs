@@ -44,7 +44,7 @@ public class HomeFrag extends Fragment implements View.OnClickListener {
     private List<Card> cardList = new ArrayList<>();
     private RecyclerView reco_rec, rece_rec;
     private CardAdapter mCardAdapter;
-    private TextView acc_name, sign_out;
+    private TextView rect,acc_name, sign_out;
     private CircleImageView acc_img;
     private OnFragmentInteractionListener mListener;
     private RecyclerView recyclerView;
@@ -82,6 +82,7 @@ public class HomeFrag extends Fragment implements View.OnClickListener {
         recyclerView = view.findViewById(R.id.rece_rec);
         reco_rec = view.findViewById(R.id.reco_rec);
         acc_img = view.findViewById(R.id.acc_pic);
+        rect = view.findViewById(R.id.rec_tex);
         acc_name = view.findViewById(R.id.acc_name);
         sign_out = view.findViewById(R.id.sign_out);
 
@@ -120,7 +121,6 @@ public class HomeFrag extends Fragment implements View.OnClickListener {
                 dialog.show();
 
 
-
             }
 
             @Override
@@ -153,23 +153,27 @@ public class HomeFrag extends Fragment implements View.OnClickListener {
         // you can check notesList.size() > 0
 
         if (db.getRecentsCount() <= 0) {
+            rect.setText(getString(R.string.no_recent));
             recyclerView.setVisibility(View.GONE);
         } else {
+            rect.setText(getString(R.string.recent));
             recyclerView.setVisibility(View.VISIBLE);
         }
     }
 
     private void prepareRecoData() {
-        Card card = new Card("GBikes & Dinosaur", "https://cdn.suwalls.com/wallpapers/fantasy/dinosaur-20061-1920x1080.jpg", "Video Intelligence");
+        Card card = new Card("APIs", "http://4.bp.blogspot.com/-CNi74b9AcrE/UhU_O-mfhEI/AAAAAAAACHg/sLYYJ1fgGJ0/s200/new_google_product_icons_by_carlosjj-d2wk38e.jpg", "Code + Implementation");
         cardList.add(card);
 
-        card = new Card("Skateboarding", "https://dhei5unw3vrsx.cloudfront.net/images/skateboard_resized.jpg", "AWS Rekognition");
+
+        card = new Card("Firebase & SQL", "https://help.pandasuite.com/resources/AVfYf-idqsg5m25GTXvd/firebase-dot-png", "Backend functionality");
         cardList.add(card);
 
-        card = new Card("Cat Video", "https://i.ytimg.com/vi/YCaGYUIfdy4/maxresdefault.jpg", "Video Intelligence");
+
+        card = new Card("Libraries", "https://stfalcon.com/uploads/images/57dba6b33cfe3.png", "Implementation");
         cardList.add(card);
 
-        card = new Card("City Landscape", "https://dhei5unw3vrsx.cloudfront.net/images/city_resized.jpg", "AWS Rekognition");
+        card = new Card("Recycler + Card Views", "https://androidtutorialmagic.files.wordpress.com/2015/04/card_example.jpg", "Structure of App");
         cardList.add(card);
 
         mCardAdapter.notifyDataSetChanged();

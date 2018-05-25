@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
@@ -12,6 +13,8 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ProgressBar;
+import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import com.ibm.watson.developer_cloud.assistant.v1.Assistant;
@@ -24,8 +27,11 @@ import com.nsh.pucho.R;
 
 import java.util.ArrayList;
 
+import static android.view.View.GONE;
+
 public class ChatBot extends AppCompatActivity {
     com.ibm.watson.developer_cloud.conversation.v1.model.Context context = null;
+    ProgressBar asd;
     private RecyclerView recyclerView;
     private ChatAdapter mAdapter;
     private ArrayList<Message> messageArrayList;
@@ -39,11 +45,8 @@ public class ChatBot extends AppCompatActivity {
         setContentView(R.layout.activity_chat_bot);
         inputMessage = (EditText) findViewById(R.id.message);
         btnSend = (ImageButton) findViewById(R.id.btn_send);
-        /*String customFont = "Montserrat-Regular.ttf";
-        Typeface typeface = Typeface.createFromAsset(getAssets(), customFont);*/
-/*
-        inputMessage.setTypeface(typeface);
-*/
+        asd = findViewById(R.id.load1);
+        final RelativeLayout as = findViewById(R.id.chat);
         recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
         messageArrayList = new ArrayList<>();
         mAdapter = new ChatAdapter(messageArrayList);
@@ -55,7 +58,14 @@ public class ChatBot extends AppCompatActivity {
         this.inputMessage.setText("");
         this.initialRequest = true;
         sendMessage();
-
+        Handler handler = new Handler();
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                asd.setVisibility(GONE);
+                as.setVisibility(View.VISIBLE);
+            }
+        }, 2000);
         btnSend.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -143,9 +153,9 @@ public class ChatBot extends AppCompatActivity {
     }
 
     @Override
-    public void onBackPressed(){
+    public void onBackPressed() {
         super.onBackPressed();
-        startActivity(new Intent(ChatBot.this,MainActivity.class));
+        startActivity(new Intent(ChatBot.this, MainActivity.class));
         finish();
     }
 }

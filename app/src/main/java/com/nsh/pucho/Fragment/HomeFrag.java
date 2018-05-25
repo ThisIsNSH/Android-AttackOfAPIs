@@ -147,7 +147,7 @@ public class HomeFrag extends Fragment implements View.OnClickListener {
 
                 Dialog dialog = new Dialog(getContext());
                 dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-                dialog.setContentView(R.layout.card_aws);
+                dialog.setContentView(R.layout.card_aws1);
                 dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
                 dialog.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
                 dialog.show();

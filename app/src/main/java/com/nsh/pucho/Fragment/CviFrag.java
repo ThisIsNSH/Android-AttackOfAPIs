@@ -2,6 +2,7 @@ package com.nsh.pucho.Fragment;
 
 import android.app.Dialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.os.Bundle;
@@ -10,12 +11,14 @@ import android.support.v4.app.Fragment;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.widget.LinearLayout;
 import android.widget.RatingBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.nsh.pucho.Adapter.CardAdapter;
@@ -31,11 +34,11 @@ import com.xiaofeng.flowlayoutmanager.FlowLayoutManager;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CviFrag extends Fragment {
+public class CviFrag extends Fragment implements View.OnClickListener {
 
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
-    public String rating_value;
+    public String rating_value="1";
     private String mParam1;
     private String mParam2;
 
@@ -113,7 +116,7 @@ public class CviFrag extends Fragment {
 
         cvi_media_rec.addOnItemTouchListener(new RecyclerTouchListener(getContext(), cvi_media_rec, new RecyclerTouchListener.ClickListener() {
             @Override
-            public void onClick(View view, int position) {
+            public void onClick(final View view, int position) {
                 final Card card = cardList.get(position);
                 final Dialog dialog = new Dialog(getContext());
 
@@ -130,7 +133,7 @@ public class CviFrag extends Fragment {
                         k.setVisibility(View.GONE);
                         dialog.show();
                     }
-                }, 2000);
+                }, 5000);
 
                 cvi_label = dialog.findViewById(R.id.cvi_label);
                 cvi_shot = dialog.findViewById(R.id.cvi_shot);
@@ -172,6 +175,8 @@ public class CviFrag extends Fragment {
                         dialog1.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
                         //dialog1.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
                         dialog1.show();
+                        TextView issue = dialog1.findViewById(R.id.issue);
+                        issue.setOnClickListener(CviFrag.this);
 
                         RatingBar ratingBar = dialog1.findViewById(R.id.ratingBar);
                         ratingBar.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener() {
@@ -289,6 +294,21 @@ public class CviFrag extends Fragment {
     public void onButtonPressed(Uri uri) {
         if (mListener != null) {
             mListener.onFragmentInteraction(uri);
+        }
+    }
+
+    @Override
+    public void onClick(View view) {
+        switch (view.getId()) {
+            case R.id.issue:
+                Intent intent = new Intent(Intent.ACTION_SENDTO);
+                intent.setType("text/plain");
+                intent.setData(Uri.parse("mailto:hadanis.singh@gmail.com"));
+              //  intent.putExtra(Intent.EXTRA_EMAIL, "hadanis1.singh@gmail.com");
+                intent.putExtra(Intent.EXTRA_SUBJECT, "Issue in Cloud Video Intelligence Response");
+                intent.putExtra(Intent.EXTRA_TEXT, "Explain the discrepancy and mention the media.");
+                startActivity(Intent.createChooser(intent, "Send Email"));
+                break;
         }
     }
 

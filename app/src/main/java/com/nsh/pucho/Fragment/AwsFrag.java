@@ -2,6 +2,7 @@ package com.nsh.pucho.Fragment;
 
 import android.app.Dialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
@@ -32,13 +33,13 @@ import com.xiaofeng.flowlayoutmanager.FlowLayoutManager;
 import java.util.ArrayList;
 import java.util.List;
 
-public class AwsFrag extends Fragment {
+public class AwsFrag extends Fragment implements View.OnClickListener{
 
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
     public static int c1 = 0, c2 = 0, c3 = 0, c0 = 0;
     public SQLiteDatabase mydatabase;
-    String rating_value;
+    String rating_value="1";
     private String mParam1;
     private String mParam2;
     private OnFragmentInteractionListener mListener;
@@ -124,7 +125,7 @@ public class AwsFrag extends Fragment {
                         k.setVisibility(View.GONE);
                         dialog.show();
                     }
-                }, 2000);
+                }, 5000);
 
 
                 System.out.println(position);
@@ -274,6 +275,19 @@ public class AwsFrag extends Fragment {
     public void onButtonPressed(Uri uri) {
         if (mListener != null) {
             mListener.onFragmentInteraction(uri);
+        }
+    }
+    @Override
+    public void onClick(View view) {
+        switch (view.getId()) {
+            case R.id.issue:
+                Intent intent = new Intent(Intent.ACTION_SEND);
+                intent.setType("text/plain");
+                intent.putExtra(Intent.EXTRA_EMAIL, "hadanis.singh@gmail.com");
+                intent.putExtra(Intent.EXTRA_SUBJECT, "Issue in Cloud Video Intelligence Response");
+                intent.putExtra(Intent.EXTRA_TEXT, "Explain the discrepancy and mention the media.");
+                startActivity(Intent.createChooser(intent, "Send Email"));
+                break;
         }
     }
 

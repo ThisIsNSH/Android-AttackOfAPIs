@@ -17,8 +17,8 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="16dp"
             android:layout_gravity="center"
+            android:layout_margin="16dp"
             android:fontFamily="@font/psb"
             android:text="Rate the result"
             android:textColor="@color/text"
@@ -26,24 +26,26 @@
 
         <RatingBar
             android:id="@+id/ratingBar"
-            android:layout_marginLeft="8dp"
-            android:layout_marginRight="8dp"
-            android:numStars="5"
-            android:theme="@style/AppTheme3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="8dp" />
+            android:layout_marginBottom="8dp"
+            android:layout_marginLeft="8dp"
+            android:rating="1"
+            android:layout_marginRight="8dp"
+            android:numStars="5"
+            android:theme="@style/AppTheme3" />
 
-    <TextView
-        android:layout_width="match_parent"
-        android:textAlignment="center"
-        android:clickable="true"
-        android:layout_height="wrap_content"
-        android:foreground="?attr/selectableItemBackgroundBorderless"
-        android:text="Issue with the result"
-        android:fontFamily="ps"
-        android:layout_gravity="center_horizontal"
-        android:paddingBottom="8dp"/>
+        <TextView
+            android:id="@+id/issue"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:clickable="true"
+            android:fontFamily="ps"
+            android:foreground="?attr/selectableItemBackgroundBorderless"
+            android:paddingBottom="8dp"
+            android:text="Issue with the result"
+            android:textAlignment="center" />
 
     </LinearLayout>
 

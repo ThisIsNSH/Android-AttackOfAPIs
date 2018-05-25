@@ -25,6 +25,7 @@ import com.nsh.pucho.Database.Recent;
 import com.nsh.pucho.Extra.Card;
 import com.nsh.pucho.Listener.RecyclerTouchListener;
 import com.nsh.pucho.R;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -39,6 +40,7 @@ public class HomeFrag extends Fragment implements View.OnClickListener {
     public RecentAdapter mAdapter;
     public List<Recent> notesList = new ArrayList<>();
     public DatabaseHelper db;
+
     private String mParam1;
     private String mParam2;
     private List<Card> cardList = new ArrayList<>();
@@ -97,9 +99,9 @@ public class HomeFrag extends Fragment implements View.OnClickListener {
         recyclerView.setAdapter(mAdapter);
         toggleEmptyNotes();
 
-        //acc_name.setText(new LoginActivity().getName());
-        //Picasso.with(getContext()).load(new LoginActivity().getURI()).into(acc_img);
-        //sign_out.setOnClickListener(this);
+        acc_name.setText(new LoginActivity().getName());
+        Picasso.with(getContext()).load(new LoginActivity().getURI()).into(acc_img);
+        sign_out.setOnClickListener(this);
 
         mCardAdapter = new CardAdapter(getContext(), cardList);
         LinearLayoutManager mLayoutManager3 = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
@@ -162,7 +164,7 @@ public class HomeFrag extends Fragment implements View.OnClickListener {
     }
 
     private void prepareRecoData() {
-        Card card = new Card("APIs", "http://4.bp.blogspot.com/-CNi74b9AcrE/UhU_O-mfhEI/AAAAAAAACHg/sLYYJ1fgGJ0/s200/new_google_product_icons_by_carlosjj-d2wk38e.jpg", "Code + Implementation");
+        Card card = new Card("APIs", "https://inform.tmforum.org/wp-content/uploads/2014/08/APIs-shutterstock_210232156-2-702x336.jpg", "Code + Implementation");
         cardList.add(card);
 
 
@@ -190,6 +192,9 @@ public class HomeFrag extends Fragment implements View.OnClickListener {
         switch (view.getId()) {
             case R.id.sign_out:
                 FirebaseAuth.getInstance().signOut();
+                notesList.clear();
+                mAdapter.notifyDataSetChanged();
+                toggleEmptyNotes();
                 Toast.makeText(getContext(), "Signout Successfull!", Toast.LENGTH_LONG).show();
                 startActivity(new Intent(getActivity(), LoginActivity.class));
                 getActivity().finish();

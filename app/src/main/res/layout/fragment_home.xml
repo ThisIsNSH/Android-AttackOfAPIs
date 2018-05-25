@@ -46,8 +46,9 @@
                 android:layout_below="@id/acc_name"
                 android:layout_toRightOf="@id/acc_pic"
                 android:background="?attr/selectableItemBackgroundBorderless"
-                android:fontFamily="@font/ps"
+                android:fontFamily="@font/psi"
                 android:text="Signout"
+
                 android:textColor="@color/text"
                 android:textSize="20sp" />
         </RelativeLayout>

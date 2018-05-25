@@ -57,6 +57,8 @@ dependencies {
     annotationProcessor 'android.arch.lifecycle:compiler:1.0.0-rc1';
     annotationProcessor 'android.arch.persistence.room:compiler:1.0.0-rc1';
 
+    compile 'com.ibm.watson.developer_cloud:java-sdk:5.5.0'
+
     compile 'com.squareup.picasso:picasso:2.5.2'
     compile 'com.squareup.okhttp:okhttp:2.5.0'
     implementation 'com.google.firebase:firebase-database:15.0.0'
@@ -70,6 +72,7 @@ dependencies {
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
 }
+
 
 
 

@@ -6,6 +6,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
@@ -14,6 +15,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
+import android.widget.LinearLayout;
 import android.widget.RatingBar;
 import android.widget.Toast;
 
@@ -80,6 +82,7 @@ public class AwsFrag extends Fragment {
     }
 
     private void recView(View view) {
+        final LinearLayout k = view.findViewById(R.id.loading);
 
         aws_media_rec = view.findViewById(R.id.aws_media_rec);
         use_own_rec = view.findViewById(R.id.use_own_rec);
@@ -107,12 +110,22 @@ public class AwsFrag extends Fragment {
             @Override
             public void onClick(View view, int position) {
                 final Card card = cardList.get(position);
+
+                k.setVisibility(View.VISIBLE);
                 final Dialog dialog = new Dialog(getContext());
                 dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
                 dialog.setContentView(R.layout.card_aws);
                 dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
                 dialog.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-                dialog.show();
+                final Handler handle = new Handler();
+                handle.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        k.setVisibility(View.GONE);
+                        dialog.show();
+                    }
+                }, 2000);
+
 
                 System.out.println(position);
                 aws_label = (RecyclerView) dialog.findViewById(R.id.aws_label);

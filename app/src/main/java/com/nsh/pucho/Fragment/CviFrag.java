@@ -1,9 +1,11 @@
 package com.nsh.pucho.Fragment;
 
 import android.app.Dialog;
+import android.content.DialogInterface;
 import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
@@ -12,6 +14,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
+import android.widget.LinearLayout;
+import android.widget.RatingBar;
+import android.widget.Toast;
 
 import com.nsh.pucho.Adapter.CardAdapter;
 import com.nsh.pucho.Adapter.LabelAdapter;
@@ -30,6 +35,7 @@ public class CviFrag extends Fragment {
 
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
+    public String rating_value;
     private String mParam1;
     private String mParam2;
 
@@ -85,6 +91,7 @@ public class CviFrag extends Fragment {
 
         cvi_media_rec = view.findViewById(R.id.cvi_media_rec);
         use_own_rec1 = view.findViewById(R.id.use_own_rec1);
+        final LinearLayout k = view.findViewById(R.id.loading);
 
         mCardAdapter = new CardAdapter(getContext(), cardList);
         mCardAdapter1 = new CardAdapter(getContext(), cardList1);
@@ -107,13 +114,23 @@ public class CviFrag extends Fragment {
         cvi_media_rec.addOnItemTouchListener(new RecyclerTouchListener(getContext(), cvi_media_rec, new RecyclerTouchListener.ClickListener() {
             @Override
             public void onClick(View view, int position) {
-                Card card = cardList.get(position);
+                final Card card = cardList.get(position);
                 final Dialog dialog = new Dialog(getContext());
+
+                k.setVisibility(View.VISIBLE);
+
                 dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
                 dialog.setContentView(R.layout.card_cvi);
                 dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
                 dialog.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-                dialog.show();
+                final Handler handle = new Handler();
+                handle.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        k.setVisibility(View.GONE);
+                        dialog.show();
+                    }
+                }, 2000);
 
                 cvi_label = dialog.findViewById(R.id.cvi_label);
                 cvi_shot = dialog.findViewById(R.id.cvi_shot);
@@ -146,10 +163,39 @@ public class CviFrag extends Fragment {
                 labelList1.clear();
                 labelList2.clear();
                 prepareLabelData(position);
-                DatabaseHelper n = new DatabaseHelper(getContext());
 
-                n.insertRecent(card.getName(), card.getImg(), card.getFunction());
+                dialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
+                    public void onDismiss(DialogInterface dialog) {
+                        final Dialog dialog1 = new Dialog(getContext());
+                        dialog1.requestWindowFeature(Window.FEATURE_NO_TITLE);
+                        dialog1.setContentView(R.layout.card_star);
+                        dialog1.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
+                        //dialog1.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+                        dialog1.show();
 
+                        RatingBar ratingBar = dialog1.findViewById(R.id.ratingBar);
+                        ratingBar.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener() {
+                            @Override
+                            public void onRatingChanged(RatingBar ratingBar, float v, boolean b) {
+                                if (v > 0)
+                                    rating_value = String.valueOf(v);
+                                else
+                                    rating_value = String.valueOf(0);
+                            }
+                        });
+
+                        dialog1.setOnDismissListener(new DialogInterface.OnDismissListener() {
+                            @Override
+                            public void onDismiss(DialogInterface dialogInterface) {
+                                Toast.makeText(getContext(), "Thanks for the feedback", Toast.LENGTH_SHORT).show();
+                                DatabaseHelper n = new DatabaseHelper(getContext());
+                                n.insertRecent(card.getName(), rating_value, card.getFunction());
+
+                            }
+                        });
+
+                    }
+                });
                 //Toast.makeText(getContext(), card.getName() + " is selected!", Toast.LENGTH_SHORT).show();
             }
 

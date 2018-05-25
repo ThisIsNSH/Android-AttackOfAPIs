@@ -1,6 +1,7 @@
 package com.nsh.pucho.Activity;
 
 import android.content.Context;
+import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
@@ -139,5 +140,12 @@ public class ChatBot extends AppCompatActivity {
             }
         });
         thread.start();
+    }
+
+    @Override
+    public void onBackPressed(){
+        super.onBackPressed();
+        startActivity(new Intent(ChatBot.this,MainActivity.class));
+        finish();
     }
 }

@@ -41,7 +41,7 @@ public class CardAdapter extends RecyclerView.Adapter<CardAdapter.MyViewHolder> 
         Card card = cardList.get(position);
 
         holder.name.setText(card.getName());
-        Picasso.with(mContext).load(card.getImg()).into(holder.img);
+        Picasso.with(mContext).load(card.getImg()).placeholder(R.drawable.l).into(holder.img);
         holder.function.setText(card.getFunction());
     }
 

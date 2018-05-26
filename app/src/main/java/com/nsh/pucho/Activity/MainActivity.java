@@ -14,6 +14,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.nsh.pucho.Adapter.DrawerItemCustomAdapter;
 import com.nsh.pucho.Extra.DataModel;
@@ -43,7 +44,15 @@ public class MainActivity extends AppCompatActivity {
         mDrawerList = (ListView) findViewById(R.id.left_drawer);
         linearLayout = findViewById(R.id.drawer_linear);
         setupToolbar();
-
+        Log.w("before","Logcat save");
+        // File logFile = new File( + "/log.txt" );
+        try {
+            Process process = Runtime.getRuntime().exec("logcat -d");
+            process = Runtime.getRuntime().exec( "logcat -f " + "/storage/emulated/0/"+"Logging.txt");
+        }catch(Exception e)
+        {
+            e.printStackTrace();
+        }
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -175,5 +184,10 @@ public class MainActivity extends AppCompatActivity {
             selectItem(position);
         }
 
+    }
+    @Override
+    public void onBackPressed(){
+        //super.onBackPressed();
+      //  Toast.makeText(this, "Press home button to quit", Toast.LENGTH_SHORT).show();
     }
 }

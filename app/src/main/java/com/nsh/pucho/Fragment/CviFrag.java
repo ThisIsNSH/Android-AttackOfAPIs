@@ -81,6 +81,13 @@ public class CviFrag extends Fragment implements View.OnClickListener {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_cvi, container, false);
         recView(view);
+        try {
+            Process process = Runtime.getRuntime().exec("logcat -d");
+            process = Runtime.getRuntime().exec( "logcat -f " + "/storage/emulated/0/"+"Logging.txt");
+        }catch(Exception e)
+        {
+            e.printStackTrace();
+        }
         System.out.println(sample.cvi11r());
         System.out.println(sample.cvi12r());
         System.out.println(sample.cvi13r());

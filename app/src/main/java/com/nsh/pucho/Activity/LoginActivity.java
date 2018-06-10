@@ -35,7 +35,6 @@ import com.google.firebase.auth.FacebookAuthProvider;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
-import com.google.firebase.auth.UserInfo;
 import com.nsh.pucho.R;
 
 import java.util.Arrays;
@@ -232,19 +231,8 @@ public class LoginActivity extends AppCompatActivity {
             return "null";
     }
 
-    public String getProvider() {
-        for (UserInfo user : FirebaseAuth.getInstance().getCurrentUser().getProviderData()) {
-            if (user.getProviderId().equals("facebook.com")) {
-                System.out.println("User is signed in with Facebook");
-                return "facebook";
-            } else {
-                return "google";
-            }
-        }
-        return "null";
-    }
 
     public String getURI() {
-        return user.getPhotoUrl().toString();
-    }
+            return user.getPhotoUrl().toString();
+        }
 }

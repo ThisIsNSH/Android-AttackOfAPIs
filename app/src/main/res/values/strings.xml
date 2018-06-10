@@ -2,15 +2,15 @@
     <string name="app_name">Pucho</string>
     <string name="user_name">no user</string>
     <string name="user_pic">no pic</string>
-    <string name="facebook_app_id"></string>
+    <string name="facebook_app_id">508440866220645</string>
     <string name="about">A Multi-Lingual\nQuery &amp; Action platform</string>
-    <string name="fb_login_protocol_scheme"></string>
+    <string name="fb_login_protocol_scheme">fb508440866220645</string>
     <string name="tnc1">By logging in you agree to our</string>
     <string name="tnc2">privacy policy &amp; terms of service.</string>
-    <string name="client_id"></string>
-    <string name="username"></string>
-    <string name="password"></string>
-    <string name="work"></string>
+    <string name="client_id">774856605271-rgfqpvrq6ce1kh0eub0g7cv2neot99vu.apps.googleusercontent.com</string>
+    <string name="username">29ac1045-e0ca-4412-97b2-7656be2d6ac7</string>
+    <string name="password">PzZq8LwHY834</string>
+    <string name="work">7a7bc018-cbd9-4f7e-a5ff-a6e5ced04ffe</string>
     <string name="no_recent">No Recent Activtiy</string>
     <string name="recent">Recent Activity</string>
 

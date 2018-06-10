@@ -2,6 +2,7 @@ package com.nsh.pucho.Activity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Environment;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -46,13 +47,18 @@ public class MainActivity extends AppCompatActivity {
         setupToolbar();
         Log.w("before","Logcat save");
         // File logFile = new File( + "/log.txt" );
+        String filePath = Environment.getExternalStorageDirectory() + "/logcat.txt";
+
         try {
             Process process = Runtime.getRuntime().exec("logcat -d");
             process = Runtime.getRuntime().exec( "logcat -f " + "/storage/emulated/0/"+"Logging.txt");
+            Runtime.getRuntime().exec(new String[]{"logcat", "-f", filePath, "MyAppTAG:V", "*:S"});
+
         }catch(Exception e)
         {
             e.printStackTrace();
         }
+
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override

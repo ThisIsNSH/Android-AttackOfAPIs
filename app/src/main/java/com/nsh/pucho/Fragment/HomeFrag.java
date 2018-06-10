@@ -100,7 +100,7 @@ public class HomeFrag extends Fragment implements View.OnClickListener {
         toggleEmptyNotes();
 
         acc_name.setText(new LoginActivity().getName());
-        Picasso.with(getContext()).load(new LoginActivity().getURI()).into(acc_img);
+        Picasso.with(getContext()).load(new LoginActivity().getURI()).placeholder(R.drawable.l).error(R.drawable.l).into(acc_img);
         sign_out.setOnClickListener(this);
 
         mCardAdapter = new CardAdapter(getContext(), cardList);

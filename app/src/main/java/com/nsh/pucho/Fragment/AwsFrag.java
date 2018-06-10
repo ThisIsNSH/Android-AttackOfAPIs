@@ -1,10 +1,13 @@
 package com.nsh.pucho.Fragment;
 
 import android.app.Dialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.drawable.ColorDrawable;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
@@ -12,6 +15,7 @@ import android.support.v4.app.Fragment;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -119,13 +123,19 @@ public class AwsFrag extends Fragment implements View.OnClickListener{
                 dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
                 dialog.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
                 final Handler handle = new Handler();
+                if(checkInternetConnection()){
                 handle.postDelayed(new Runnable() {
                     @Override
                     public void run() {
                         k.setVisibility(View.GONE);
                         dialog.show();
                     }
-                }, 5000);
+                }, 5000);}
+                else{
+                    k.setVisibility(View.GONE);
+                    //Toast.makeText(getContext(), "No internet connection", Toast.LENGTH_SHORT).show();
+                    return;
+                }
 
 
                 System.out.println(position);
@@ -189,6 +199,19 @@ public class AwsFrag extends Fragment implements View.OnClickListener{
         }));
 
     }
+    private boolean checkInternetConnection() {
+        ConnectivityManager cm =
+                (ConnectivityManager) getActivity().getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo activeNetwork = cm.getActiveNetworkInfo();
+        boolean isConnected = activeNetwork != null &&
+                activeNetwork.isConnectedOrConnecting();
+        if (isConnected) {
+            return true;
+        } else {
+            Toast.makeText(getContext(), " No Internet Connection available ", Toast.LENGTH_LONG).show();
+            return false;
+        }
+    }
 
     private void prepareLabelData(int a) {
 
@@ -204,9 +227,13 @@ public class AwsFrag extends Fragment implements View.OnClickListener{
                 ArrayList<String> x1 = sample.aws1r();
                 for (int i = 0; i < x1.size(); i++) {
                     label = new Label(x1.get(i));
+
+                    Log.i("AWS Label", label.getLabel());
                     labelList.add(label);
                 }
                 System.out.println(labelList);
+
+
                 mLabelAdapter.notifyDataSetChanged();
                 c2 = 1;
                 break;
@@ -215,9 +242,12 @@ public class AwsFrag extends Fragment implements View.OnClickListener{
                 ArrayList<String> x2 = sample.aws2r();
                 for (int i = 0; i < x2.size(); i++) {
                     label = new Label(x2.get(i));
+
+                    Log.i("AWS Label", label.getLabel());
                     labelList.add(label);
                 }
                 System.out.println(labelList);
+
                 mLabelAdapter.notifyDataSetChanged();
                 c3 = 1;
                 break;
@@ -227,6 +257,8 @@ public class AwsFrag extends Fragment implements View.OnClickListener{
                 for (int i = 0; i < x3.size(); i++) {
                     label = new Label(x3.get(i));
                     labelList.add(label);
+
+                    Log.i("AWS Label", label.getLabel());
                 }
                 System.out.println(labelList);
                 mLabelAdapter.notifyDataSetChanged();
@@ -237,9 +269,12 @@ public class AwsFrag extends Fragment implements View.OnClickListener{
                 ArrayList<String> x4 = sample.aws4r();
                 for (int i = 0; i < x4.size(); i++) {
                     label = new Label(x4.get(i));
+
+                    Log.i("AWS Label", label.getLabel());
                     labelList.add(label);
                 }
                 System.out.println(labelList);
+
                 mLabelAdapter.notifyDataSetChanged();
                 c1 = 1;
                 break;

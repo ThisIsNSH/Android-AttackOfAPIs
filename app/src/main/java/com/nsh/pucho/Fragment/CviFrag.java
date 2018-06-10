@@ -1,9 +1,12 @@
 package com.nsh.pucho.Fragment;
 
 import android.app.Dialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.drawable.ColorDrawable;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
@@ -88,13 +91,26 @@ public class CviFrag extends Fragment implements View.OnClickListener {
         {
             e.printStackTrace();
         }
-        System.out.println(sample.cvi11r());
+        /*System.out.println(sample.cvi11r());
         System.out.println(sample.cvi12r());
         System.out.println(sample.cvi13r());
         System.out.println(sample.cvi21r());
         System.out.println(sample.cvi22r());
-        System.out.println(sample.cvi23r());
+        System.out.println(sample.cvi23r());*/
         return view;
+    }
+    private boolean checkInternetConnection() {
+        ConnectivityManager cm =
+                (ConnectivityManager) getActivity().getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo activeNetwork = cm.getActiveNetworkInfo();
+        boolean isConnected = activeNetwork != null &&
+                activeNetwork.isConnectedOrConnecting();
+        if (isConnected) {
+            return true;
+        } else {
+            Toast.makeText(getContext(), " No Internet Connection available ", Toast.LENGTH_LONG).show();
+            return false;
+        }
     }
 
     private void recView(View view) {
@@ -134,13 +150,19 @@ public class CviFrag extends Fragment implements View.OnClickListener {
                 dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
                 dialog.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
                 final Handler handle = new Handler();
-                handle.postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        k.setVisibility(View.GONE);
-                        dialog.show();
-                    }
-                }, 5000);
+                if(checkInternetConnection()){
+                    handle.postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            k.setVisibility(View.GONE);
+                            dialog.show();
+                        }
+                    }, 5000);}
+                else{
+                    k.setVisibility(View.GONE);
+                    //Toast.makeText(getContext(), "No internet connection", Toast.LENGTH_SHORT).show();
+                    return;
+                }
 
                 cvi_label = dialog.findViewById(R.id.cvi_label);
                 cvi_shot = dialog.findViewById(R.id.cvi_shot);
@@ -228,6 +250,7 @@ public class CviFrag extends Fragment implements View.OnClickListener {
                 ArrayList<String> x3 = sample.cvi11r();
                 for (int i = 0; i < x3.size(); i++) {
                     label = new Label(x3.get(i));
+                    Log.i("CVI Label", label.getLabel());
                     labelList.add(label);
                 }
                 mLabelAdapter.notifyDataSetChanged();
@@ -235,41 +258,57 @@ public class CviFrag extends Fragment implements View.OnClickListener {
                 ArrayList<String> x6 = sample.cvi13r();
                 for (int i = 0; i < x6.size(); i++) {
                     label1 = new Label(x6.get(i));
+
+                    Log.i("CVI Shot", label1.getLabel());
                     labelList1.add(label1);
                 }
                 mLabelAdapter1.notifyDataSetChanged();
                 ArrayList<String> x5 = sample.cvi12r();
                 for (int i = 0; i < x5.size(); i++) {
                     label2 = new Label(x5.get(i));
+
+                    Log.i("CVI Explicit", label2.getLabel());
                     labelList2.add(label2);
                 }
                 mLabelAdapter2.notifyDataSetChanged();
-                System.out.println(labelList);
+                /*System.out.println(labelList);
                 System.out.println(labelList1);
                 System.out.println(labelList2);
 
-
+                Log.d("CVI label", labelList.toString());
+                Log.d("CVI Shot", labelList1.toString());
+                Log.d("CVI Explicit", labelList2.toString());
+*/
                 break;
             case 1:
                 ArrayList<String> x31 = sample.cvi21r();
                 for (int i = 0; i < x31.size(); i++) {
                     label = new Label(x31.get(i));
+
+                    Log.i("CVI Label", label.getLabel());
                     labelList.add(label);
                 }
 
                 ArrayList<String> x61 = sample.cvi23r();
                 for (int i = 0; i < x61.size(); i++) {
                     label1 = new Label(x61.get(i));
+
+                    Log.i("CVI Shot", label1.getLabel());
                     labelList1.add(label1);
                 }
 
                 ArrayList<String> x51 = sample.cvi22r();
                 for (int i = 0; i < x51.size(); i++) {
                     label2 = new Label(x51.get(i));
+
+                    Log.i("CVI Explicit", label2.getLabel());
                     labelList2.add(label2);
                 }
 
-
+                /*Log.d("CVI label", labelList.toString());
+                Log.d("CVI Shot", labelList1.toString());
+                Log.d("CVI Explicit", labelList2.toString());
+*/
                 mLabelAdapter.notifyDataSetChanged();
                 mLabelAdapter1.notifyDataSetChanged();
                 mLabelAdapter2.notifyDataSetChanged();
